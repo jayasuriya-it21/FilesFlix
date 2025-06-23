@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/client_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modern-player.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
@@ -39,14 +42,31 @@
         <div class="video-container">
             <button class="close-btn" onclick="closeVideo()">×</button>
             <div id="videoPlayerContainer"></div>
+            
+            <!-- Hotstar-style overlay controls -->
+            <div class="player-overlay-controls">
+                <button class="seek-button seek-backward" id="seekBackward">
+                    <i class="fas fa-backward"></i>
+                    <span>-10s</span>
+                </button>
+                <button class="seek-button seek-forward" id="seekForward">
+                    <i class="fas fa-forward"></i>
+                    <span>+10s</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12"></script>
     <script>
         let allMediaFiles = [];
         let filteredFiles = [];
         let currentPlayer = null;
+        let activePlaybackPath = null;
+        let currentVideoMetadata = null;
+        let currentVideoHash = null;
+        let previewThumbnails = [];
 
         document.addEventListener('DOMContentLoaded', () => {
             loadMediaFiles();
@@ -59,13 +79,27 @@
                 btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter));
             });
             document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && document.getElementById('videoModal').classList.contains('active')) {
-                    closeVideo();
+                // Handle keyboard shortcuts
+                if (document.getElementById('videoModal').classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeVideo();
+                    } else if (e.key === 'ArrowRight') {
+                        seekVideo(10); // Forward 10 seconds
+                    } else if (e.key === 'ArrowLeft') {
+                        seekVideo(-10); // Backward 10 seconds
+                    } else if (e.key === ' ') {
+                        e.preventDefault();
+                        togglePlayPause();
+                    }
                 }
             });
             document.getElementById('videoModal').addEventListener('click', function(e) {
                 if (e.target === this) closeVideo();
             });
+            
+            // Set up forward/backward buttons
+            document.getElementById('seekForward').addEventListener('click', () => seekVideo(10));
+            document.getElementById('seekBackward').addEventListener('click', () => seekVideo(-10));
         }
 
         async function loadMediaFiles() {
@@ -148,28 +182,354 @@
             return `<div class="media-placeholder">${icon}</div>`;
         }
 
-        function playVideo(filePath) {
+        // Enhanced playVideo function with multi-track support
+        async function playVideo(filePath) {
+            // Track what we're playing to avoid duplicate requests
+            activePlaybackPath = filePath;
+            
             if (currentPlayer) {
                 currentPlayer.dispose();
+                currentPlayer = null;
             }
+            
             const modal = document.getElementById('videoModal');
             const container = document.getElementById('videoPlayerContainer');
             
-            // The HLS source path is now constructed from the file path
-            const hlsSrc = `/hls/${filePath}`;
-
-            container.innerHTML = `<video id="videoPlayer" class="video-js vjs-big-play-centered" controls preload="auto"></video>`;
+            // Show loading state
+            container.innerHTML = `
+                <div class="video-loading">
+                    <div class="spinner-wrapper">
+                        <div class="spinner"></div>
+                    </div>
+                    <p>Preparing your video...</p>
+                </div>`;
             
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Try to fetch video metadata for audio/subtitle tracks
+            try {
+                const metadataResponse = await fetch(`/metadata/${filePath}`);
+                if (metadataResponse.ok) {
+                    currentVideoMetadata = await metadataResponse.json();
+                    console.log("Video metadata:", currentVideoMetadata);
+                } else {
+                    console.warn("Failed to get video metadata");
+                    currentVideoMetadata = null;
+                }
+            } catch (error) {
+                console.error("Error fetching metadata:", error);
+                currentVideoMetadata = null;
+            }
+            
+            // Get video hash for accessing variants and previews
+            currentVideoHash = getFileHash(filePath);
+            
+            // Try direct streaming first - more efficient if supported
+            const streamSrc = `/stream/${filePath}`;
+            
+            // Create video element with modern player and audio/subtitle menu buttons
+            container.innerHTML = `
+                <video id="videoPlayer" class="video-js vjs-ott-skin" controls preload="auto">
+                    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>
+                </video>`;
+            
+            // Initialize the player with both sources - it will try direct streaming first
             currentPlayer = videojs('videoPlayer', {
                 fluid: true,
                 responsive: true,
                 aspectRatio: '16:9',
                 autoplay: true,
-                sources: [{ src: hlsSrc, type: 'application/x-mpegURL' }]
+                playbackRates: [0.5, 0.75, 1, 1.25, 1.5, 2],
+                controlBar: {
+                    volumePanel: {inline: false},
+                    children: [
+                        'playToggle',
+                        'progressControl',
+                        'currentTimeDisplay',
+                        'timeDivider',
+                        'durationDisplay',
+                        'audioTrackButton',   // For audio track selection
+                        'subsCapsButton',     // For subtitle selection
+                        'volumePanel',
+                        'playbackRateMenuButton',
+                        'fullscreenToggle'
+                    ]
+                },
+                html5: {
+                    vhs: {
+                        overrideNative: true,
+                        enableLowInitialPlaylist: true,
+                        limitRenditionByPlayerDimensions: true
+                    },
+                    nativeVideoTracks: false,
+                    nativeAudioTracks: false,
+                    nativeTextTracks: false
+                }
             });
             
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Try to load preview thumbnails for seeking
+            loadPreviewThumbnails(currentVideoHash);
+            
+            // Try to load the direct stream first
+            currentPlayer.src({
+                src: streamSrc,
+                type: 'video/mp4'
+            });
+            
+            // Handle error by falling back to HLS
+            currentPlayer.on('error', function() {
+                if (activePlaybackPath !== filePath) return; // Prevent race condition
+                
+                console.log('Direct streaming failed, trying HLS...');
+                const hlsSrc = `/hls/${filePath}`;
+                
+                // If HLS.js is supported for better compatibility
+                if (Hls.isSupported()) {
+                    const hls = new Hls({
+                        maxBufferLength: 30,
+                        maxMaxBufferLength: 600,
+                        enableWorker: true,
+                        lowLatencyMode: false,
+                    });
+                    
+                    hls.on(Hls.Events.ERROR, function(event, data) {
+                        if (data.fatal) {
+                            console.error('HLS.js error:', data);
+                            showPlaybackError();
+                        }
+                    });
+                    
+                    hls.loadSource(hlsSrc);
+                    hls.attachMedia(currentPlayer.tech().el());
+                    
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        currentPlayer.play();
+                        loadAudioAndSubtitleTracks(currentVideoHash);
+                    });
+                    
+                    currentPlayer.tech().on('retry', function() {
+                        hls.loadSource(hlsSrc);
+                    });
+                } else if (currentPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                    // For Safari and iOS
+                    currentPlayer.src({
+                        src: hlsSrc,
+                        type: 'application/x-mpegURL'
+                    });
+                    currentPlayer.play();
+                    loadAudioAndSubtitleTracks(currentVideoHash);
+                } else {
+                    showPlaybackError();
+                }
+            });
+            
+            // When ready, load audio and subtitle tracks
+            currentPlayer.on('loadedmetadata', function() {
+                loadAudioAndSubtitleTracks(currentVideoHash);
+            });
+        }
+        
+        // Load preview thumbnails for seeking
+        async function loadPreviewThumbnails(videoHash) {
+            try {
+                // Try to fetch preview thumbnails
+                previewThumbnails = [];
+                for (let i = 0; i < 10; i++) {
+                    const previewUrl = `/hls/${videoHash}/previews/preview_${i}.jpg`;
+                    // Check if thumbnail exists
+                    const response = await fetch(previewUrl, { method: 'HEAD' });
+                    if (response.ok) {
+                        previewThumbnails.push(previewUrl);
+                    }
+                }
+                
+                if (previewThumbnails.length > 0) {
+                    console.log(`Loaded ${previewThumbnails.length} preview thumbnails`);
+                    setupThumbnailPreview();
+                }
+            } catch (error) {
+                console.log("No preview thumbnails available:", error);
+            }
+        }
+        
+        // Setup thumbnail preview on hover over progress bar
+        function setupThumbnailPreview() {
+            if (!currentPlayer || previewThumbnails.length === 0) return;
+            
+            const progressControl = currentPlayer.controlBar.progressControl.el();
+            const thumbnailPreview = document.createElement('div');
+            thumbnailPreview.className = 'vjs-thumbnail-preview';
+            thumbnailPreview.innerHTML = '<img src="" alt="Preview">';
+            progressControl.appendChild(thumbnailPreview);
+            
+            const previewImg = thumbnailPreview.querySelector('img');
+            
+            progressControl.addEventListener('mousemove', function(e) {
+                const bounds = progressControl.getBoundingClientRect();
+                const mousePosition = (e.clientX - bounds.left) / bounds.width;
+                
+                // Calculate which thumbnail to show
+                const thumbnailIndex = Math.min(
+                    Math.floor(mousePosition * previewThumbnails.length),
+                    previewThumbnails.length - 1
+                );
+                
+                // Show the preview
+                thumbnailPreview.style.display = 'block';
+                thumbnailPreview.style.left = `${mousePosition * 100}%`;
+                previewImg.src = previewThumbnails[thumbnailIndex];
+                
+                // Update time tooltip
+                if (currentPlayer.duration()) {
+                    const timePosition = mousePosition * currentPlayer.duration();
+                    const minutes = Math.floor(timePosition / 60);
+                    const seconds = Math.floor(timePosition % 60);
+                    const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    
+                    // Create or update time tooltip
+                    let timeTooltip = thumbnailPreview.querySelector('.time-tooltip');
+                    if (!timeTooltip) {
+                        timeTooltip = document.createElement('div');
+                        timeTooltip.className = 'time-tooltip';
+                        thumbnailPreview.appendChild(timeTooltip);
+                    }
+                    timeTooltip.textContent = timeString;
+                }
+            });
+            
+            progressControl.addEventListener('mouseout', function() {
+                thumbnailPreview.style.display = 'none';
+            });
+            
+            // Enable seeking when clicking on the progress bar
+            progressControl.addEventListener('click', function(e) {
+                const bounds = progressControl.getBoundingClientRect();
+                const clickPosition = (e.clientX - bounds.left) / bounds.width;
+                
+                if (currentPlayer.duration()) {
+                    const seekTime = clickPosition * currentPlayer.duration();
+                    currentPlayer.currentTime(seekTime);
+                }
+            });
+        }
+        
+        // Load audio and subtitle tracks from variants.json
+        async function loadAudioAndSubtitleTracks(videoHash) {
+            if (!currentPlayer) return;
+            
+            try {
+                const response = await fetch(`/hls/${videoHash}/variants.json`);
+                if (!response.ok) {
+                    console.warn("No variants found for this video");
+                    return;
+                }
+                
+                const variants = await response.json();
+                
+                // Add audio tracks
+                if (variants.audio_tracks && variants.audio_tracks.length > 0) {
+                    const audioTrackList = currentPlayer.audioTracks();
+                    
+                    // Clear existing tracks
+                    while (audioTrackList.length > 0) {
+                        audioTrackList.removeTrack(audioTrackList[0]);
+                    }
+                    
+                    // Add each audio track
+                    variants.audio_tracks.forEach((track, index) => {
+                        audioTrackList.addTrack(new videojs.AudioTrack({
+                            id: `audio-${track.index}`,
+                            kind: 'alternative',
+                            label: track.title || `Audio Track ${index + 1} (${track.language})`,
+                            language: track.language,
+                            enabled: index === 0 // Enable first track by default
+                        }));
+                    });
+                    
+                    console.log(`Added ${variants.audio_tracks.length} audio tracks`);
+                }
+                
+                // Add subtitle tracks
+                if (variants.subtitle_tracks && variants.subtitle_tracks.length > 0) {
+                    // Remove any existing text tracks
+                    const existingTracks = Array.from(currentPlayer.textTracks());
+                    existingTracks.forEach(track => {
+                        currentPlayer.removeRemoteTextTrack(track);
+                    });
+                    
+                    // Add each subtitle track
+                    variants.subtitle_tracks.forEach((track, index) => {
+                        currentPlayer.addRemoteTextTrack({
+                            kind: 'subtitles',
+                            src: `/hls/${videoHash}/subtitle_${track.index}.vtt`,
+                            srclang: track.language,
+                            label: track.title || `Subtitle ${index + 1} (${track.language})`,
+                            default: index === 0 // Make first track default
+                        }, false);
+                    });
+                    
+                    console.log(`Added ${variants.subtitle_tracks.length} subtitle tracks`);
+                }
+            } catch (error) {
+                console.error("Error loading tracks:", error);
+            }
+        }
+        
+        // Seek forward or backward
+        function seekVideo(seconds) {
+            if (!currentPlayer) return;
+            
+            const currentTime = currentPlayer.currentTime();
+            const newTime = Math.max(0, currentTime + seconds);
+            
+            // Show seek animation
+            const direction = seconds > 0 ? 'forward' : 'backward';
+            const button = document.querySelector(`.seek-${direction}`);
+            
+            button.classList.add('active');
+            setTimeout(() => button.classList.remove('active'), 500);
+            
+            // Actually seek
+            currentPlayer.currentTime(newTime);
+            
+            // If paused, consider playing
+            if (currentPlayer.paused()) {
+                currentPlayer.play();
+            }
+        }
+        
+        // Toggle play/pause
+        function togglePlayPause() {
+            if (!currentPlayer) return;
+            
+            if (currentPlayer.paused()) {
+                currentPlayer.play();
+            } else {
+                currentPlayer.pause();
+            }
+        }
+        
+        // Generate a file hash (matching the server-side function)
+        function getFileHash(filePath) {
+            // Simple hash function for demo - in production use a proper hashing library
+            let hash = 0;
+            for (let i = 0; i < filePath.length; i++) {
+                const char = filePath.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return Math.abs(hash).toString(16);
+        }
+        
+        function showPlaybackError() {
+            const container = document.getElementById('videoPlayerContainer');
+            container.innerHTML = `
+                <div class="playback-error">
+                    <h3>Playback Error</h3>
+                    <p>Sorry, this video cannot be played. It may be in an unsupported format or have audio/video codec issues.</p>
+                    <button class="action-btn primary" onclick="closeVideo()">Close</button>
+                </div>`;
         }
 
         function closeVideo() {
@@ -179,14 +539,18 @@
             }
             document.getElementById('videoModal').classList.remove('active');
             document.body.style.overflow = '';
+            activePlaybackPath = null;
+            currentVideoMetadata = null;
+            currentVideoHash = null;
+            previewThumbnails = [];
         }
         
         // --- Helper Functions ---
         const getFileType = (name) => {
             const ext = name.split('.').pop().toLowerCase();
-            if (['mp4', 'mkv', 'mov', 'avi', 'webm'].includes(ext)) return 'video';
+            if (['mp4', 'mkv', 'mov', 'avi', 'webm', 'flv', 'm4v'].includes(ext)) return 'video';
             if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) return 'image';
-            if (['pdf', 'doc', 'docx', 'txt'].includes(ext)) return 'document';
+            if (['pdf', 'doc', 'docx', 'txt', 'rtf', 'odt'].includes(ext)) return 'document';
             return 'other';
         };
         const formatFileSize = (b) => (b === 0) ? '0 B' : ( (b, d = 2, k = 1024) => parseFloat((b / Math.pow(k, Math.floor(Math.log(b) / Math.log(k)))).toFixed(d)) + ' ' + ['B','KB','MB','GB'][Math.floor(Math.log(b)/Math.log(k))])(b);

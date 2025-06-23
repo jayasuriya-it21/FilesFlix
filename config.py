@@ -8,6 +8,7 @@ class Config:
     CACHE_DIR = BASE_DIR / 'cache'
     THUMBNAIL_DIR = CACHE_DIR / 'thumbnails'
     HLS_DIR = CACHE_DIR / 'hls'
+    METADATA_DIR = CACHE_DIR / 'metadata'  # New directory for storing track metadata
     
     HOST = '0.0.0.0'
     PORT = 5000
@@ -25,3 +26,4 @@ class Config:
         cls.LOG_DIR.mkdir(exist_ok=True)
         cls.THUMBNAIL_DIR.mkdir(parents=True, exist_ok=True)
         cls.HLS_DIR.mkdir(parents=True, exist_ok=True)
+        cls.METADATA_DIR.mkdir(parents=True, exist_ok=True)  # Create metadata directory

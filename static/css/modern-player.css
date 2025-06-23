@@ -1,0 +1,458 @@
+/* static/css/modern-player.css */
+/* Modern OTT-style Video Player */
+
+/* Video.js OTT Skin - like Netflix/Prime Video */
+.video-js.vjs-ott-skin {
+    --primary-color: #e50914;
+    --primary-hover-color: #f40612;
+    --text-color: #ffffff;
+    --secondary-bg: rgba(28, 28, 30, 0.9);
+    --control-bar-height: 54px;
+    
+    font-family: 'Inter', Arial, sans-serif;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Control Bar */
+.vjs-ott-skin .vjs-control-bar {
+    height: var(--control-bar-height);
+    background: linear-gradient(0deg, var(--secondary-bg) 0%, rgba(0, 0, 0, 0.1) 100%);
+    padding: 0 16px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.vjs-ott-skin.vjs-user-inactive .vjs-control-bar {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+/* Progress Bar */
+.vjs-ott-skin .vjs-progress-control {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 10px;
+    transition: height 0.2s ease;
+    padding: 0;
+}
+
+.vjs-ott-skin:hover .vjs-progress-control {
+    height: 15px;
+    top: -15px;
+}
+
+.vjs-ott-skin .vjs-progress-holder {
+    height: 5px;
+    margin: 0;
+    border-radius: 0;
+    transition: height 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.vjs-ott-skin:hover .vjs-progress-holder {
+    height: 10px;
+}
+
+.vjs-ott-skin .vjs-play-progress {
+    background-color: var(--primary-color);
+    border-radius: 0;
+}
+
+.vjs-ott-skin .vjs-play-progress:before {
+    display: none;
+}
+
+.vjs-ott-skin .vjs-load-progress {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+}
+
+/* Big Play Button */
+.vjs-ott-skin .vjs-big-play-button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    line-height: 90px;
+    margin-left: -45px;
+    margin-top: -45px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.vjs-ott-skin .vjs-big-play-button:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.vjs-ott-skin .vjs-big-play-button .vjs-icon-placeholder:before {
+    font-size: 40px;
+    line-height: 90px;
+}
+
+/* Controls and Buttons */
+.vjs-ott-skin .vjs-button {
+    width: 48px;
+    height: 48px;
+    margin: 0 3px;
+}
+
+.vjs-ott-skin .vjs-button > .vjs-icon-placeholder:before {
+    font-size: 20px;
+    line-height: 48px;
+    color: var(--text-color);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.vjs-ott-skin .vjs-button:hover > .vjs-icon-placeholder:before {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.vjs-ott-skin .vjs-play-control {
+    width: 48px;
+    height: 48px;
+}
+
+.vjs-ott-skin .vjs-play-control .vjs-icon-placeholder:before {
+    font-size: 26px;
+}
+
+/* Time Display */
+.vjs-ott-skin .vjs-time-control {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: var(--control-bar-height);
+    padding: 0 8px;
+}
+
+.vjs-ott-skin .vjs-current-time {
+    padding-left: 0;
+}
+
+.vjs-ott-skin .vjs-time-divider {
+    padding: 0 3px;
+    text-align: center;
+}
+
+/* Volume Panel */
+.vjs-ott-skin .vjs-volume-panel {
+    margin-right: 10px;
+}
+
+.vjs-ott-skin .vjs-volume-panel .vjs-volume-control {
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    margin: 0;
+}
+
+.vjs-ott-skin .vjs-volume-panel:hover .vjs-volume-control,
+.vjs-ott-skin .vjs-volume-panel.vjs-volume-control-active .vjs-volume-control {
+    width: 80px;
+}
+
+.vjs-ott-skin .vjs-volume-panel .vjs-volume-bar {
+    margin: 22px 8px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+.vjs-ott-skin .vjs-volume-panel .vjs-volume-level {
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Loading Spinner */
+.vjs-ott-skin .vjs-loading-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--primary-color);
+    width: 60px;
+    height: 60px;
+}
+
+/* Fullscreen Button */
+.vjs-ott-skin .vjs-fullscreen-control {
+    margin-right: 0;
+}
+
+/* Menu Buttons */
+.vjs-ott-skin .vjs-menu-button-popup .vjs-menu {
+    width: 180px;
+    left: -70px;
+}
+
+.vjs-ott-skin .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+    background: var(--secondary-bg);
+    border-radius: 6px;
+    padding: 8px 0;
+    max-height: none;
+    overflow: hidden;
+}
+
+.vjs-ott-skin .vjs-menu-button-popup .vjs-menu-item {
+    font-size: 14px;
+    padding: 12px 16px;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.vjs-ott-skin .vjs-menu-button-popup .vjs-menu-item:hover,
+.vjs-ott-skin .vjs-menu-button-popup .vjs-menu-item.vjs-selected {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+/* Playback Rate Button */
+.vjs-ott-skin .vjs-playback-rate-value {
+    font-size: 14px;
+    line-height: var(--control-bar-height);
+}
+
+/* Subtitle Menu */
+.vjs-ott-skin .vjs-subs-caps-button .vjs-menu-content li {
+    font-size: 14px;
+    text-transform: none;
+}
+
+/* Captions Display */
+.vjs-ott-skin .vjs-text-track-display {
+    bottom: 60px;
+}
+
+.vjs-ott-skin .vjs-text-track-cue > div {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 18px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vjs-ott-skin .vjs-time-divider,
+    .vjs-ott-skin .vjs-duration {
+        display: none;
+    }
+    
+    .vjs-ott-skin .vjs-control-bar {
+        padding: 0 8px;
+    }
+    
+    .vjs-ott-skin .vjs-button {
+        width: 40px;
+    }
+}
+
+/* Custom Loading Animation */
+.video-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 2;
+}
+
+.spinner-wrapper {
+    margin-bottom: 15px;
+}
+
+.video-loading .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.video-loading p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Error Display */
+.playback-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+.playback-error h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.playback-error p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #aaa;
+}
+
+.playback-error .action-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.playback-error .action-btn:hover {
+    background-color: var(--primary-hover-color);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* static/css/modern-player.css (Add this to your existing CSS) */
+
+/* Hotstar-style overlay controls */
+.player-overlay-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Let clicks pass through to the video */
+    z-index: 2; /* Above video but below control bar */
+}
+
+.seek-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 30px;
+    cursor: pointer;
+    pointer-events: auto; /* Make buttons clickable */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    opacity: 0.7;
+}
+
+.seek-button:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.seek-button.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.seek-button i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.seek-button span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Thumbnail Preview on Seek */
+.vjs-thumbnail-preview {
+    position: absolute;
+    bottom: 100%;
+    transform: translateX(-50%);
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 2px;
+    pointer-events: none; /* Don't interfere with progress bar interaction */
+    z-index: 10;
+}
+
+.vjs-thumbnail-preview img {
+    width: 160px;
+    height: auto;
+    border-radius: 2px;
+}
+
+.vjs-thumbnail-preview .time-tooltip {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+/* Audio and Subtitle Menu Improvements */
+.vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+    max-height: 300px !important; /* Allow more space for many tracks */
+    overflow-y: auto !important;
+}
+
+.vjs-menu-item {
+    font-size: 14px !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.vjs-menu-item-text {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .seek-button {
+        width: 60px;
+        height: 60px;
+        margin: 0 15px;
+    }
+    
+    .seek-button i {
+        font-size: 18px;
+    }
+    
+    .seek-button span {
+        font-size: 12px;
+    }
+    
+    .vjs-thumbnail-preview img {
+        width: 120px;
+    }
+}
