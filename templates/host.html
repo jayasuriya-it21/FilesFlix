@@ -1,0 +1,65 @@
+<!-- templates\host.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileFlix Host</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/host_style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/client" class="navbar-brand">FileFlix</a>
+        <div class="nav-links">
+            <a href="/client" class="nav-link">Client View</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Host Controls</h1>
+        <div class="controls">
+            <h3>Media Directory</h3>
+            <p>Enter the full path to the directory you want to serve media from.</p>
+            <div class="input-group">
+                <input type="text" id="current-dir" value="{{ current_dir }}" placeholder="e.g., C:\Users\YourUser\Videos or /home/user/media">
+                <button class="btn-primary" onclick="setDir()">Set Directory</button>
+            </div>
+            <div id="message-log"></div>
+        </div>
+    </div>
+
+    <script>
+        function logMessage(message, type = 'info') {
+            const log = document.getElementById('message-log');
+            const p = document.createElement('p');
+            p.textContent = message;
+            p.className = `log-${type}`;
+            log.prepend(p);
+        }
+
+        async function setDir() {
+            const dir = document.getElementById('current-dir').value;
+            if (!dir) {
+                logMessage('Error: Directory path cannot be empty.', 'error');
+                return;
+            }
+            try {
+                const response = await fetch('/set_dir', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ directory: dir })
+                });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    logMessage('Successfully set directory to: ' + data.dir, 'success');
+                } else {
+                    logMessage('Error: ' + data.message, 'error');
+                }
+            } catch (err) {
+                logMessage('A network error occurred. Is the server running?', 'error');
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>

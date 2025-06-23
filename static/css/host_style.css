@@ -1,0 +1,78 @@
+/* static/css/host_style.css */
+body {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+.navbar {
+    background-color: #0f0f0f;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+.nav-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #0f0f0f;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+h1 {
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+h3 { margin-top: 1.5rem; }
+p { color: #aaa; font-size: 0.9rem; }
+.input-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+#current-dir {
+    flex-grow: 1;
+    padding: 0.75rem;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+#message-log {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    min-height: 50px;
+}
+.log-error { color: #ef4444; }
+.log-success { color: #10b981; }
+.log-info { color: #aaa; }
