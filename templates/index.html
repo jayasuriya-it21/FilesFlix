@@ -1,0 +1,257 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}FileFlix - Media Center{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/explorer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <div class="header-left">
+            <h1 class="logo">
+                <i class="fas fa-play-circle"></i>
+                FileFlix
+            </h1>
+            <nav class="nav-menu">
+                <a href="/" class="nav-item active">Browse</a>
+                <a href="/host" class="nav-item">Settings</a>
+            </nav>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search movies, shows, files...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="view-controls">
+                <button id="grid-view-btn" class="view-btn active" title="Grid View">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button id="list-view-btn" class="view-btn" title="List View">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+            
+            <div class="system-status" id="system-status">
+                <i class="fas fa-server"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-container" id="breadcrumb-container">
+        <button class="breadcrumb-item home" data-path="">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </button>
+        <div class="breadcrumb-path" id="breadcrumb-path"></div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">
+            <i class="fas fa-globe"></i>
+            All Files
+        </button>
+        <button class="filter-tab" data-filter="video">
+            <i class="fas fa-film"></i>
+            Videos
+        </button>
+        <button class="filter-tab" data-filter="image">
+            <i class="fas fa-image"></i>
+            Images
+        </button>
+        <button class="filter-tab" data-filter="audio">
+            <i class="fas fa-music"></i>
+            Audio
+        </button>
+        <button class="filter-tab" data-filter="document">
+            <i class="fas fa-file-alt"></i>
+            Documents
+        </button>
+        <button class="filter-tab" data-filter="folder">
+            <i class="fas fa-folder"></i>
+            Folders
+        </button>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+        <!-- File Explorer -->
+        <div id="file-explorer" class="file-explorer grid-view">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="pagination-container">
+            <!-- Dynamic pagination will be loaded here -->
+        </div>
+    </div>
+</main>
+
+<!-- Video Player Modal -->
+<div id="video-modal" class="video-modal">
+    <div class="video-modal-content">
+        <div class="video-container">
+            <video id="video-player" class="video-player" preload="metadata">
+                <p>Your browser does not support HTML5 video.</p>
+            </video>
+            
+            <!-- Custom Video Controls -->
+            <div class="video-controls" id="video-controls">
+                <!-- Top Controls -->
+                <div class="controls-top">
+                    <div class="video-title" id="video-title">Video Title</div>
+                    <div class="controls-top-right">
+                        <button class="control-btn settings-btn" id="settings-btn" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="control-btn close-btn" id="close-video-btn" title="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Center Controls -->
+                <div class="controls-center">
+                    <button class="control-btn large-btn rewind-btn" id="rewind-btn" title="Rewind 10s">
+                        <i class="fas fa-backward"></i>
+                        <span class="btn-label">10</span>
+                    </button>
+                    
+                    <button class="control-btn extra-large-btn play-pause-btn" id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <button class="control-btn large-btn forward-btn" id="forward-btn" title="Forward 10s">
+                        <i class="fas fa-forward"></i>
+                        <span class="btn-label">10</span>
+                    </button>
+                </div>
+
+                <!-- Bottom Controls -->
+                <div class="controls-bottom">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress-buffer" id="progress-buffer"></div>
+                            <div class="progress-played" id="progress-played"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                        
+                        <!-- Preview Thumbnail -->
+                        <div class="progress-preview" id="progress-preview">
+                            <img id="preview-thumbnail" src="" alt="Preview">
+                            <div class="preview-time" id="preview-time">00:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls-row">
+                        <div class="controls-left">
+                            <span class="time-display" id="current-time">00:00</span>
+                            <span class="time-separator">/</span>
+                            <span class="time-display" id="duration">00:00</span>
+                        </div>
+                        
+                        <div class="controls-right">
+                            <button class="control-btn" id="audio-track-btn" title="Audio Tracks">
+                                <i class="fas fa-volume-high"></i>
+                            </button>
+                            
+                            <button class="control-btn" id="subtitle-btn" title="Subtitles">
+                                <i class="fas fa-closed-captioning"></i>
+                            </button>
+                            
+                            <div class="volume-container">
+                                <button class="control-btn" id="volume-btn" title="Volume">
+                                    <i class="fas fa-volume-high"></i>
+                                </button>
+                                <div class="volume-slider-container">
+                                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                                </div>
+                            </div>
+                            
+                            <button class="control-btn" id="speed-btn" title="Playback Speed">
+                                <i class="fas fa-gauge-high"></i>
+                                <span class="speed-display">1x</span>
+                            </button>
+                            
+                            <button class="control-btn" id="fullscreen-btn" title="Fullscreen">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Menu -->
+    <div class="settings-menu" id="settings-menu">
+        <div class="settings-header">
+            <h3>Player Settings</h3>
+            <button class="control-btn" id="close-settings-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="settings-content">
+            <!-- Audio Tracks -->
+            <div class="settings-section">
+                <h4>Audio Tracks</h4>
+                <div class="track-list" id="audio-track-list">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+            
+            <!-- Subtitles -->
+            <div class="settings-section">
+                <h4>Subtitles</h4>
+                <div class="track-list" id="subtitle-track-list">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+            
+            <!-- Quality -->
+            <div class="settings-section">
+                <h4>Quality</h4>
+                <div class="quality-list" id="quality-list">
+                    <label class="quality-option">
+                        <input type="radio" name="quality" value="auto" checked>
+                        <span>Auto</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image/Document Viewer Modal -->
+<div id="preview-modal" class="preview-modal">
+    <div class="preview-modal-content">
+        <button class="control-btn close-btn" id="close-preview-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="preview-container" id="preview-container">
+            <!-- Dynamic content -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/explorer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/player.js') }}"></script>
+{% endblock %}
