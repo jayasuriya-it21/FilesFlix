@@ -1,0 +1,54 @@
+/* static/css/host_style.css */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.status-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-sm);
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group .flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-group .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-header h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .status-item {
+        font-size: var(--font-size-xs);
+    }
+}

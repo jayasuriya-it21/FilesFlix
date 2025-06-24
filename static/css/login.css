@@ -1,0 +1,39 @@
+/* static/css/login.css */
+.login-container {
+    max-width: 400px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-md);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-sm);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        margin: var(--spacing-md) auto;
+        padding: var(--spacing-sm);
+    }
+
+    .card-header h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .form-group .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%;
+    }
+
+    .error-message {
+        font-size: var(--font-size-xs);
+    }
+}

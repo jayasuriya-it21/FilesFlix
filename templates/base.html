@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>FileFlix{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body data-is-host="{{ is_host|lower }}">
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">FileFlix</div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading your media...</div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">            <div class="header-left">
+                <a href="/" class="logo">
+                    <i class="fas fa-film"></i>
+                    FileFlix
+                </a>
+                {% if is_host %}
+                    <nav class="nav-menu">
+                        <a href="/upload" class="nav-item">Upload</a>
+                        <a href="/settings" class="nav-item">Settings</a>
+                    </nav>
+                {% endif %}
+            </div>
+            <div class="header-center">
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search media..." aria-label="Search media">
+                    <button id="search-btn" class="search-btn" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="view-controls">
+                    <button id="grid-view-btn" class="view-btn active" title="Grid View" aria-label="Grid View">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button id="list-view-btn" class="view-btn" title="List View" aria-label="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>                {% if is_host %}
+                    <button id="path-select-btn" class="btn btn-secondary" title="Select Media Path" aria-label="Select Media Path">
+                        <i class="fas fa-folder-open"></i>
+                    </button>
+                    <a href="/logout" class="btn btn-ghost" title="Logout" aria-label="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                {% else %}
+                    <a href="/login" class="btn btn-primary" title="Login" aria-label="Login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Host Login
+                    </a>
+                {% endif %}
+                <span class="system-status" title="Server Status" aria-label="Server Status">
+                    <i class="fas fa-circle"></i>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/player.js"></script>
+    <script src="/static/js/explorer.js"></script>
+    <script src="/static/js/app.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
