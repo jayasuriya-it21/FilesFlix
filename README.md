@@ -1,94 +1,108 @@
-FileFlix - OTT-Style Media Server
-📌 Description
-FileFlix is a lightweight, local media streaming and file-sharing platform built with Flask. It allows you to stream videos (MP4, MKV, etc.), view images and PDFs, and download files over your local network, with a modern UI inspired by Netflix and Hotstar, and Google Drive-like file browsing.
-⚙️ Features
 
-🎬 Stream videos with HLS adaptive bitrate and subtitle support
-🖼️ Browse folders, view images/PDFs inline, download files
-📂 Google Drive-like file explorer with search and categorization
-🎨 Modern, responsive UI inspired by Hotstar
-🔒 Basic authentication for secure LAN access
-🖥️ Automatic thumbnail generation for videos
-🧠 Directory monitoring for new files
-📜 Logging and server controls
+---
 
-✅ Requirements
+## ✅ FileFlix
 
-Python 3.8+
-Flask
-FFmpeg (for thumbnails and HLS)
-Tkinter (for directory selection GUI)
+### 🎯 Purpose
 
-📦 Setup
-1. Install Python Dependencies
+A modern **Netflix-style** OTT streaming and file server for **local networks**—stream, browse, and download your media content securely and beautifully.
+
+### 🚀 Core Highlights
+
+* **Media Streaming**: Adaptive HLS video streaming with subtitle support.
+* **File Explorer**: Google Drive-like interface with type-based categorization.
+* **Rich UI/UX**: Inspired by Hotstar and Netflix for familiarity and ease.
+* **LAN Access**: Accessible across devices on the same network.
+* **Authentication**: Simple login system for basic security.
+* **Auto Thumbnails + Directory Watcher**: Smart local media management.
+
+---
+
+## 📋 Setup Instructions (Cleaned Up)
+
+### 🔧 Dependencies
+
+Install Python packages:
+
+```bash
 pip install -r requirements.txt
+```
 
-2. Install FFmpeg
+Install FFmpeg and add it to your system PATH:
 
-Download from: https://ffmpeg.org/download.html
-Add to PATH:
-Windows: C:\Program Files\ffmpeg\bin
-Linux: /usr/local/bin/ffmpeg
+* [Download FFmpeg](https://ffmpeg.org/download.html)
+* **Windows**: Add `C:\Program Files\ffmpeg\bin` to PATH
+* **Linux/macOS**: Add `/usr/local/bin/ffmpeg` to PATH
 
+Verify installation:
 
-Verify:ffmpeg -version
+```bash
+ffmpeg -version
+```
 
+### 🗂️ Recommended Folder Layout
 
-
-3. Folder Structure
-fileflix/
-├── static/
-│   ├── css/style.css
-│   ├── js/main.js
-│  
-├── templates/
-│   ├── client.html
-│   └── host.html
-├── cache/
-│   ├── thumbnails/
-│   ├── metadata/
-│   └── temp/
-├── logs/
-├── media/
+```
+FileFlix/
 ├── app.py
 ├── config.py
 ├── utils.py
-├── requirements.txt
-└── README.md
+├── static/
+│   ├── css/...
+│   ├── js/...
+│   └── images/
+├── templates/
+├── cache/
+├── logs/
+```
 
-4. Run the Server
+### ▶️ Running the Server
+
+```bash
 python app.py
+```
 
+Access locally: [http://localhost:5000](http://localhost:5000)
+Access on LAN: [http://<your-ip>:5000](http://<your-ip>:5000)
+Host controls: [http://localhost:5000/host](http://localhost:5000/host)
+**Default login:** `admin / password`
 
-Access: http://localhost:5000
-Default credentials: admin/password
-Host controls: /host
+---
 
-📺 Access from Other Devices
+## 💡 Usage Tips
 
-Connect devices to the same Wi-Fi/LAN.
-Find your local IP:
-Windows: ipconfig
-Linux/macOS: ifconfig
+* Place media in `/media` or choose a custom directory via host controls.
+* Add subtitles by naming `.srt` files same as the video.
+* Customize themes in `static/css/client_style.css`.
+* Explore logs in `logs/fileflix.log`.
 
+---
 
-Access: http://<your-local-ip>:5000
+## 🧰 Troubleshooting
 
-💡 Tips
+| Issue                    | Solution                                                    |
+| ------------------------ | ----------------------------------------------------------- |
+| FFmpeg not found         | Ensure it's installed and PATH is correctly set             |
+| Thumbnails not generated | Check FFmpeg setup and `cache/thumbnails` write permissions |
+| Video won’t play         | Confirm HLS support and video format compatibility          |
+| Auth problems            | Use default credentials or update them in `app.py`          |
 
-Place media in /media or select a custom directory via /host.
-Add .srt files with the same name as videos for subtitles.
-Customize UI in static/css/style.css.
-Check logs in logs/fileflix.log.
+---
 
-🛠️ Troubleshooting
+## 📜 License
 
-FFmpeg not found: Ensure FFmpeg is in PATH.
-No thumbnails: Verify FFmpeg installation and write permissions for cache/thumbnails.
-Streaming issues: Check network bandwidth and file format support.
-Authentication errors: Use admin/password or update app.py.
+**MIT License** – Open to personal and commercial modification and distribution.
 
-📄 License
-MIT License. Free to use and modify.
+---
 
-Happy streaming with FileFlix 🍿
+## 🚀 Future Enhancement Ideas (Optional)
+
+If you're planning to extend the app, consider:
+
+* **Mobile UI Optimization**
+* **DLNA/Chromecast support**
+* **User profiles with access control**
+* **Dark/light theme toggle**
+* **Docker container for deployment**
+
+---
