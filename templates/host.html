@@ -1,28 +1,61 @@
-<!-- templates\host.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FileFlix Host</title>
+    <title>FilesFlix - Host Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/host_style.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <a href="/client" class="navbar-brand">FileFlix</a>
+        <a href="{{ url_for('client') }}" class="navbar-brand">FilesFlix</a>
         <div class="nav-links">
-            <a href="/client" class="nav-link">Client View</a>
+            <a href="{{ url_for('client') }}" class="nav-link">Client View</a>
+            <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
         </div>
     </nav>
+    
     <div class="container">
-        <h1>Host Controls</h1>
-        <div class="controls">
+        <h1>Host Dashboard</h1>
+        
+        <!-- System Information -->
+        <div class="section">
+            <h3>System Information</h3>
+            <div class="system-stats" id="system-stats">
+                <div class="stat-card">
+                    <div class="stat-label">CPU Usage</div>
+                    <div class="stat-value" id="cpu-usage">{{ system_info.cpu_percent or 0 }}%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Memory Usage</div>
+                    <div class="stat-value" id="memory-usage">{{ system_info.memory_percent or 0 }}%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">FFmpeg Status</div>
+                    <div class="stat-value" id="ffmpeg-status">
+                        {% if system_info.ffmpeg_available %}✅ Available{% else %}❌ Not Found{% endif %}
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Server IPs</div>
+                    <div class="stat-value" id="server-ips">
+                        {% for ip in system_info.local_ips %}
+                            <div><a href="http://{{ ip }}:5000" target="_blank">{{ ip }}</a></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Directory Controls -->
+        <div class="section">
             <h3>Media Directory</h3>
-            <p>Enter the full path to the directory you want to serve media from.</p>
+            <p>Current directory: <strong>{{ current_dir }}</strong></p>
             <div class="input-group">
-                <input type="text" id="current-dir" value="{{ current_dir }}" placeholder="e.g., C:\Users\YourUser\Videos or /home/user/media">
-                <button class="btn-primary" onclick="setDir()">Set Directory</button>
+                <input type="text" id="current-dir" value="{{ current_dir }}" 
+                       placeholder="Enter full path to media directory">
+                <button class="btn-primary" onclick="setDirectory()">Set Directory</button>
             </div>
             <div id="message-log"></div>
         </div>
@@ -35,31 +68,74 @@
             p.textContent = message;
             p.className = `log-${type}`;
             log.prepend(p);
+            
+            // Auto-clear messages after 5 seconds
+            setTimeout(() => {
+                if (p.parentNode) {
+                    p.parentNode.removeChild(p);
+                }
+            }, 5000);
         }
 
-        async function setDir() {
+        async function setDirectory() {
             const dir = document.getElementById('current-dir').value;
             if (!dir) {
                 logMessage('Error: Directory path cannot be empty.', 'error');
                 return;
             }
+            
             try {
-                const response = await fetch('/set_dir', {
+                const response = await fetch('/api/set_directory', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ directory: dir })
                 });
+                
                 const data = await response.json();
-                if (data.status === 'success') {
-                    logMessage('Successfully set directory to: ' + data.dir, 'success');
+                
+                if (response.ok && data.status === 'success') {
+                    logMessage('Successfully set directory to: ' + data.directory, 'success');
+                    location.reload(); // Reload to update current directory display
                 } else {
-                    logMessage('Error: ' + data.message, 'error');
+                    logMessage('Error: ' + (data.error || 'Unknown error'), 'error');
                 }
             } catch (err) {
-                logMessage('A network error occurred. Is the server running?', 'error');
+                logMessage('Network error occurred. Is the server running?', 'error');
                 console.error(err);
             }
         }
+
+        // Auto-refresh system stats every 30 seconds
+        async function updateSystemStats() {
+            try {
+                const response = await fetch('/api/system');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    document.getElementById('cpu-usage').textContent = data.cpu_percent + '%';
+                    document.getElementById('memory-usage').textContent = data.memory_percent + '%';
+                    document.getElementById('ffmpeg-status').textContent = 
+                        data.ffmpeg_available ? '✅ Available' : '❌ Not Found';
+                    
+                    const ipsContainer = document.getElementById('server-ips');
+                    ipsContainer.innerHTML = '';
+                    data.local_ips.forEach(ip => {
+                        const div = document.createElement('div');
+                        const link = document.createElement('a');
+                        link.href = `http://${ip}:5000`;
+                        link.target = '_blank';
+                        link.textContent = ip;
+                        div.appendChild(link);
+                        ipsContainer.appendChild(div);
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to update system stats:', err);
+            }
+        }
+
+        // Update system stats every 30 seconds
+        setInterval(updateSystemStats, 30000);
     </script>
 </body>
 </html>

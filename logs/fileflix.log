@@ -14987,3 +14987,832 @@ NameError: name 'get_metadata_path' is not defined
 2025-06-24 10:50:09,721 - INFO - 192.168.84.143 - - [24/Jun/2025 10:50:09] "[36mGET /thumbnail/Hi%20Venus%20(2024)%20S01E01-E24\\Hi%20Venus%20S01E09%20.mkv HTTP/1.1[0m" 304 -
 2025-06-24 10:50:09,721 - INFO - 192.168.84.143 - - [24/Jun/2025 10:50:09] "[36mGET /thumbnail/Hi%20Venus%20(2024)%20S01E01-E24\\Hi%20Venus%20S01E10%20.mkv HTTP/1.1[0m" 304 -
 2025-06-24 10:50:09,722 - INFO - 192.168.84.143 - - [24/Jun/2025 10:50:09] "GET /thumbnail/Hi%20Venus%20(2024)%20S01E01-E24\\Hi%20Venus%20S01E11%20.mkv HTTP/1.1" 200 -
+2025-07-24 14:04:06,841 - INFO - FileFlix Starting Up...
+2025-07-24 14:04:32,990 - INFO - FileFlix Starting Up...
+2025-07-24 14:04:58,197 - INFO - FileFlix Starting Up...
+2025-07-24 14:05:14,798 - INFO - FileFlix Starting Up...
+2025-07-24 14:05:14,800 - WARNING - Failed to start file watcher (this is non-critical): 'handle' must be a _ThreadHandle
+2025-07-24 14:05:14,800 - INFO - File watcher disabled. New files will be processed on demand.
+2025-07-24 14:05:14,801 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-07-24 14:05:14,818 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:05:14,819 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:05:22,571 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:05:22,572 - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 48, in decorated
+    return self.auth_error_callback()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 37, in decorated
+    if 'WWW-Authenticate' not in res.headers.keys():
+                                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'headers'
+2025-07-24 14:05:22,575 - INFO - 10.223.84.143 - - [24/Jul/2025 14:05:22] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-07-24 14:05:22,845 - INFO - 10.223.84.143 - - [24/Jul/2025 14:05:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-24 14:05:26,763 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:05:26,763 - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 48, in decorated
+    return self.auth_error_callback()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 37, in decorated
+    if 'WWW-Authenticate' not in res.headers.keys():
+                                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'headers'
+2025-07-24 14:05:26,765 - INFO - 10.223.84.143 - - [24/Jul/2025 14:05:26] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-07-24 14:05:31,986 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:05:31,987 - ERROR - Exception on /host [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 48, in decorated
+    return self.auth_error_callback()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 37, in decorated
+    if 'WWW-Authenticate' not in res.headers.keys():
+                                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'headers'
+2025-07-24 14:05:31,988 - INFO - 10.223.84.143 - - [24/Jul/2025 14:05:31] "[35m[1mGET /host HTTP/1.1[0m" 500 -
+2025-07-24 14:06:28,158 - INFO - FileFlix Starting Up...
+2025-07-24 14:06:28,160 - WARNING - Failed to start file watcher (this is non-critical): 'handle' must be a _ThreadHandle
+2025-07-24 14:06:28,161 - INFO - File watcher disabled. New files will be processed on demand.
+2025-07-24 14:06:28,161 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-07-24 14:06:28,176 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:06:28,176 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:06:31,084 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:06:31,085 - ERROR - Exception on /host [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 48, in decorated
+    return self.auth_error_callback()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 37, in decorated
+    if 'WWW-Authenticate' not in res.headers.keys():
+                                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'headers'
+2025-07-24 14:06:31,087 - INFO - 10.223.84.143 - - [24/Jul/2025 14:06:31] "[35m[1mGET /host HTTP/1.1[0m" 500 -
+2025-07-24 14:06:34,827 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:06:34,827 - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 48, in decorated
+    return self.auth_error_callback()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\venv\Lib\site-packages\flask_httpauth.py", line 37, in decorated
+    if 'WWW-Authenticate' not in res.headers.keys():
+                                 ^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'headers'
+2025-07-24 14:06:34,828 - INFO - 10.223.84.143 - - [24/Jul/2025 14:06:34] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-07-24 14:07:09,944 - INFO - FileFlix Starting Up...
+2025-07-24 14:07:09,947 - WARNING - Failed to start file watcher (this is non-critical): 'handle' must be a _ThreadHandle
+2025-07-24 14:07:09,947 - INFO - File watcher disabled. New files will be processed on demand.
+2025-07-24 14:07:09,947 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-07-24 14:07:09,962 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:07:09,962 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:07:13,219 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:07:13,220 - INFO - 10.223.84.143 - - [24/Jul/2025 14:07:13] "[31m[1mGET / HTTP/1.1[0m" 401 -
+2025-07-24 14:07:22,809 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:07:22,810 - INFO - 10.223.84.143 - - [24/Jul/2025 14:07:22] "[31m[1mGET / HTTP/1.1[0m" 401 -
+2025-07-24 14:07:48,750 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:07:48,751 - INFO - 10.223.84.143 - - [24/Jul/2025 14:07:48] "[31m[1mGET / HTTP/1.1[0m" 401 -
+2025-07-24 14:08:02,039 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:08:02,040 - INFO - 10.223.84.143 - - [24/Jul/2025 14:08:02] "[31m[1mGET / HTTP/1.1[0m" 401 -
+2025-07-24 14:08:08,037 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:08:08,037 - INFO - 10.223.84.143 - - [24/Jul/2025 14:08:08] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:08:15,335 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:08:15,335 - INFO - 10.223.84.143 - - [24/Jul/2025 14:08:15] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:09:13,319 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:09:13,320 - INFO - 10.223.84.143 - - [24/Jul/2025 14:09:13] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:11:07,115 - INFO - FileFlix Starting Up...
+2025-07-24 14:11:07,118 - WARNING - Failed to start file watcher (this is non-critical): 'handle' must be a _ThreadHandle
+2025-07-24 14:11:07,118 - INFO - File watcher disabled. New files will be processed on demand.
+2025-07-24 14:11:07,118 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-07-24 14:11:07,132 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:11:07,133 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:11:09,313 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:11:09,314 - INFO - 10.223.84.143 - - [24/Jul/2025 14:11:09] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:11:16,251 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:11:16,252 - INFO - 10.223.84.143 - - [24/Jul/2025 14:11:16] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:11:34,019 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:11:34,020 - INFO - 10.223.84.143 - - [24/Jul/2025 14:11:34] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:11:35,103 - WARNING - Auth failed from 10.223.84.143
+2025-07-24 14:11:35,103 - INFO - 10.223.84.143 - - [24/Jul/2025 14:11:35] "[31m[1mGET /host HTTP/1.1[0m" 401 -
+2025-07-24 14:22:53,007 - INFO - FileFlix Starting Up...
+2025-07-24 14:22:53,010 - INFO - Started directory watcher for: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix
+2025-07-24 14:22:53,010 - INFO - Starting FilesFlix server on http://0.0.0.0:5000
+2025-07-24 14:22:53,010 - INFO - Client interface: http://0.0.0.0:5000
+2025-07-24 14:22:53,010 - INFO - Host dashboard: http://0.0.0.0:5000/host (admin/password123)
+2025-07-24 14:22:53,031 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:22:53,031 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:22:59,611 - INFO - 10.223.84.143 - - [24/Jul/2025 14:22:59] "[32mGET /host HTTP/1.1[0m" 302 -
+2025-07-24 14:22:59,650 - INFO - 10.223.84.143 - - [24/Jul/2025 14:22:59] "GET /login?next=/host HTTP/1.1" 200 -
+2025-07-24 14:23:05,025 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:05] "GET /?id=c14357fe-ed4c-4f05-909a-e0293a4ff51a&vscodeBrowserReqId=1753347185011 HTTP/1.1" 200 -
+2025-07-24 14:23:05,168 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:05] "GET /static/css/client_style.css HTTP/1.1" 200 -
+2025-07-24 14:23:05,169 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:05] "GET /static/css/modern-player.css HTTP/1.1" 200 -
+2025-07-24 14:23:05,922 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:05] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:23:11,572 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:11] "[32mGET /host?id=c14357fe-ed4c-4f05-909a-e0293a4ff51a&vscodeBrowserReqId=1753347191566 HTTP/1.1[0m" 302 -
+2025-07-24 14:23:11,576 - INFO - 127.0.0.1 - - [24/Jul/2025 14:23:11] "GET /login?next=/host?id%3Dc14357fe-ed4c-4f05-909a-e0293a4ff51a%26vscodeBrowserReqId%3D1753347191566 HTTP/1.1" 200 -
+2025-07-24 14:23:29,300 - INFO - Host login successful for: admin
+2025-07-24 14:23:29,300 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:29] "[32mPOST /login?next=/host HTTP/1.1[0m" 302 -
+2025-07-24 14:23:30,366 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:30] "GET /host HTTP/1.1" 200 -
+2025-07-24 14:23:30,432 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:30] "GET /static/css/host_style.css HTTP/1.1" 200 -
+2025-07-24 14:23:37,875 - INFO - Directory changed to: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix by user admin
+2025-07-24 14:23:37,876 - INFO - Started directory watcher for: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix
+2025-07-24 14:23:37,877 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:37] "POST /api/set_directory HTTP/1.1" 200 -
+2025-07-24 14:23:38,906 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:38] "GET /host HTTP/1.1" 200 -
+2025-07-24 14:23:38,941 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:38] "[36mGET /static/css/host_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:23:55,033 - INFO - Directory changed to: E:\Videos\Kollywood by user admin
+2025-07-24 14:23:55,034 - INFO - Started directory watcher for: E:\Videos\Kollywood
+2025-07-24 14:23:55,035 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:55] "POST /api/set_directory HTTP/1.1" 200 -
+2025-07-24 14:23:56,066 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:56] "GET /host HTTP/1.1" 200 -
+2025-07-24 14:23:56,094 - INFO - 10.223.84.143 - - [24/Jul/2025 14:23:56] "[36mGET /static/css/host_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:08,263 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:08] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:08,305 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:08] "GET /static/css/client_style.css HTTP/1.1" 200 -
+2025-07-24 14:24:08,305 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:08] "GET /static/css/modern-player.css HTTP/1.1" 200 -
+2025-07-24 14:24:08,636 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:08] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:09,015 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-24 14:24:20,241 - INFO - Directory changed to: E:\Videos\Kollywood by user admin
+2025-07-24 14:24:20,242 - INFO - Started directory watcher for: E:\Videos\Kollywood
+2025-07-24 14:24:20,243 - INFO - 10.223.84.143 - - [24/Jul/2025 14:24:20] "POST /api/set_directory HTTP/1.1" 200 -
+2025-07-24 14:24:21,273 - INFO - 10.223.84.143 - - [24/Jul/2025 14:24:21] "GET /host HTTP/1.1" 200 -
+2025-07-24 14:24:21,305 - INFO - 10.223.84.143 - - [24/Jul/2025 14:24:21] "[36mGET /static/css/host_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:27,684 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:27] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:27,718 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:27] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:27,718 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:27] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:27,760 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:27] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:28,685 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:28,717 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:28,718 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:28,746 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:28,907 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:28,935 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:28,937 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:28,974 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:28] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:29,124 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:29,159 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:29,160 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:29,189 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:29,330 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:29,363 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:29,364 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:29,393 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:29] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:41,572 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:41] "GET / HTTP/1.1" 200 -
+2025-07-24 14:24:41,601 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:41] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:41,603 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:41] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:24:41,634 - INFO - 127.0.0.1 - - [24/Jul/2025 14:24:41] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:24:53,160 - INFO - 10.223.84.143 - - [24/Jul/2025 14:24:53] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:25:23,160 - INFO - 10.223.84.143 - - [24/Jul/2025 14:25:23] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:25:53,159 - INFO - 10.223.84.143 - - [24/Jul/2025 14:25:53] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:26:23,159 - INFO - 10.223.84.143 - - [24/Jul/2025 14:26:23] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:26:53,159 - INFO - 10.223.84.143 - - [24/Jul/2025 14:26:53] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:26:59,472 - INFO - 127.0.0.1 - - [24/Jul/2025 14:26:59] "GET / HTTP/1.1" 200 -
+2025-07-24 14:26:59,508 - INFO - 127.0.0.1 - - [24/Jul/2025 14:26:59] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:26:59,508 - INFO - 127.0.0.1 - - [24/Jul/2025 14:26:59] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:26:59,548 - INFO - 127.0.0.1 - - [24/Jul/2025 14:26:59] "[33mGET /files HTTP/1.1[0m" 404 -
+2025-07-24 14:27:23,160 - INFO - 10.223.84.143 - - [24/Jul/2025 14:27:23] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:28:24,291 - INFO - FileFlix Starting Up...
+2025-07-24 14:28:24,294 - INFO - Started directory watcher for: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix
+2025-07-24 14:28:24,295 - INFO - Starting FilesFlix server on http://0.0.0.0:5000
+2025-07-24 14:28:24,295 - INFO - Client interface: http://0.0.0.0:5000
+2025-07-24 14:28:24,295 - INFO - Host dashboard: http://0.0.0.0:5000/host (admin/password123)
+2025-07-24 14:28:24,314 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.223.84.143:5000
+2025-07-24 14:28:24,314 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-24 14:28:32,165 - INFO - 10.223.84.143 - - [24/Jul/2025 14:28:32] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:28:32,881 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:32] "GET /?id=9f26202f-79b4-493b-afeb-64864ad1dfe3&vscodeBrowserReqId=1753347512866 HTTP/1.1" 200 -
+2025-07-24 14:28:33,025 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:33] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:28:33,026 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:33] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:28:33,144 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:33] "GET /files HTTP/1.1" 200 -
+2025-07-24 14:28:38,753 - INFO - Directory changed to: E:\Videos\Kollywood by user admin
+2025-07-24 14:28:38,754 - INFO - Started directory watcher for: E:\Videos\Kollywood
+2025-07-24 14:28:38,754 - INFO - 10.223.84.143 - - [24/Jul/2025 14:28:38] "POST /api/set_directory HTTP/1.1" 200 -
+2025-07-24 14:28:39,787 - INFO - 10.223.84.143 - - [24/Jul/2025 14:28:39] "GET /host HTTP/1.1" 200 -
+2025-07-24 14:28:39,817 - INFO - 10.223.84.143 - - [24/Jul/2025 14:28:39] "[36mGET /static/css/host_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:28:45,728 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "GET / HTTP/1.1" 200 -
+2025-07-24 14:28:45,762 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:28:45,762 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:28:45,853 - INFO - Extracting metadata for 3 (Three) (2012).mkv...
+2025-07-24 14:28:45,855 - INFO - Extracting metadata for Ace (2025).mkv...
+2025-07-24 14:28:45,856 - INFO - Extracting metadata for Aaragan (2024).mkv...
+2025-07-24 14:28:45,858 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "GET /files HTTP/1.1" 200 -
+2025-07-24 14:28:45,948 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Adhagappattathu%20Magajanangalay%20(2017).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,948 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Aaragan%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,948 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Azadi%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,948 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Amaithi%20Padai%20(1994).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,948 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/3%20(Three)%20(2012).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,949 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Ace%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,957 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Baby%20and%20Baby%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,974 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Barroz%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,978 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Billa%20(2007).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,982 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Court%20-%20State%20vs%20A%20Nobody%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,986 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Blind%20Spot%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:45,990 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:45] "[33mGET /thumbnail/Bromance%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,000 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Chennai%20City%20Gangsters%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,010 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Captain%20Miller%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,015 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Chennai%20Express%20(2013).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,018 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Demonte%20Colony%202%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,024 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Devils%20Double%20Next%20Level%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,040 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Dheena%20(2001).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,050 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/DNA%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,060 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Don%20(2022).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,065 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Eleven%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,070 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Embiran%20(2019)].mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,072 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/EMI%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,101 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Family%20Padam%20(2024)%20[Tamil%20[Tamil%20%20%201080p%20HQ%20HDRip%20%20%20HEV~%20MR.mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,102 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Game%20Changer%20(2025)%20Tamil%20%20%201080p%20Einthusan%20WEB%20HD%20%20%20HEV~%20MR.mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,117 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Game%20Changer%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,119 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Heza%20(2019).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,125 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/HIT%20The%20Third%20Case%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,130 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Holocaust%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,132 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:46] "[33mGET /thumbnail/Iraivan%20(2023).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:46,289 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ecf0350eaabf477bf98191f48132014b.json
+2025-07-24 14:28:46,289 - INFO - Generating thumbnail for 3 (Three) (2012).mkv...
+2025-07-24 14:28:46,296 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\19dfde6092b0a8f768db0a043cc1728b.json
+2025-07-24 14:28:46,297 - INFO - Generating thumbnail for Aaragan (2024).mkv...
+2025-07-24 14:28:46,327 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\7e6d38b8dbd1905d31d0f12bc14caf08.json
+2025-07-24 14:28:46,328 - INFO - Generating thumbnail for Ace (2025).mkv...
+2025-07-24 14:28:47,705 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\7e6d38b8dbd1905d31d0f12bc14caf08.jpg
+2025-07-24 14:28:47,709 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\19dfde6092b0a8f768db0a043cc1728b.jpg
+2025-07-24 14:28:47,712 - INFO - Extracting metadata for Adhagappattathu Magajanangalay (2017).mkv...
+2025-07-24 14:28:47,714 - INFO - Extracting metadata for Amaithi Padai (1994).mkv...
+2025-07-24 14:28:47,717 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\ecf0350eaabf477bf98191f48132014b.jpg
+2025-07-24 14:28:47,722 - INFO - Extracting metadata for Azadi (2025).mkv...
+2025-07-24 14:28:47,863 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\bb39a9b32ade67cea32c9169973fd451.json
+2025-07-24 14:28:47,864 - INFO - Generating thumbnail for Adhagappattathu Magajanangalay (2017).mkv...
+2025-07-24 14:28:47,929 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\89aad44e27ac0849ed1d7dd6fb2ed82c.json
+2025-07-24 14:28:47,929 - INFO - Generating thumbnail for Azadi (2025).mkv...
+2025-07-24 14:28:47,958 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\8e1314e1d839ac4cb47decd50468d643.json
+2025-07-24 14:28:47,959 - INFO - Generating thumbnail for Amaithi Padai (1994).mkv...
+2025-07-24 14:28:49,276 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\bb39a9b32ade67cea32c9169973fd451.jpg
+2025-07-24 14:28:49,280 - INFO - Extracting metadata for Baby and Baby (2025).mkv...
+2025-07-24 14:28:49,316 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\89aad44e27ac0849ed1d7dd6fb2ed82c.jpg
+2025-07-24 14:28:49,321 - INFO - Extracting metadata for Barroz (2024).mkv...
+2025-07-24 14:28:49,354 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\8e1314e1d839ac4cb47decd50468d643.jpg
+2025-07-24 14:28:49,358 - INFO - Extracting metadata for Billa (2007).mkv...
+2025-07-24 14:28:49,473 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\67be58c9cdd015fb383889c3c58b1dbf.json
+2025-07-24 14:28:49,474 - INFO - Generating thumbnail for Baby and Baby (2025).mkv...
+2025-07-24 14:28:49,484 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\2abe77529fff244224edc6d68ca7dd06.json
+2025-07-24 14:28:49,485 - INFO - Generating thumbnail for Billa (2007).mkv...
+2025-07-24 14:28:49,491 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\dfd82be4092b4a2bc0183c81804fc12f.json
+2025-07-24 14:28:49,492 - INFO - Generating thumbnail for Barroz (2024).mkv...
+2025-07-24 14:28:50,311 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\2abe77529fff244224edc6d68ca7dd06.jpg
+2025-07-24 14:28:50,319 - INFO - Extracting metadata for Blind Spot (2025).mkv...
+2025-07-24 14:28:50,375 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Japan%20(2023).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,415 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Jinn%20-%20The%20Pet%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,420 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Jora%20Kaiya%20Thattunga%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,425 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Kadhalikka%20Neramillai%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,448 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Kalki%202898%20AD%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,492 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Kudumbasthan%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,495 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Kumbaari%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,507 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Lal%20Salaam%20(Extended%20Version)%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,516 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Maaman%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,565 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Maaveeran%20(2023).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,676 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\67be58c9cdd015fb383889c3c58b1dbf.jpg
+2025-07-24 14:28:50,682 - INFO - Extracting metadata for Bromance (2025).mkv...
+2025-07-24 14:28:50,738 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Madha%20Gaja%20Raja%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,742 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Madras%20Matinee%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,746 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ce58e180cdf2c427387b1bea61e2acc5.json
+2025-07-24 14:28:50,751 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Manithan%20(2016).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,752 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Madraskaaran%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,756 - INFO - Generating thumbnail for Blind Spot (2025).mkv...
+2025-07-24 14:28:50,768 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:50] "[33mGET /thumbnail/Maranamass%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:50,835 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\dfd82be4092b4a2bc0183c81804fc12f.jpg
+2025-07-24 14:28:50,839 - INFO - Extracting metadata for Captain Miller (2024).mkv...
+2025-07-24 14:28:50,874 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\7107dc3b9e65b69ffb652f6bde324e2a.json
+2025-07-24 14:28:50,875 - INFO - Generating thumbnail for Bromance (2025).mkv...
+2025-07-24 14:28:51,055 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Moonwalk%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,085 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Narivetta%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,088 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Mr.%20Housekeeping%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,089 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Nanban%20Oruvan%20Vandha%20Piragu%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,105 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Neram%20(2013).m4v HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,136 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\1e1bdc46fb1e4078d2eafea6ba587eed.json
+2025-07-24 14:28:51,145 - INFO - Generating thumbnail for Captain Miller (2024).mkv...
+2025-07-24 14:28:51,200 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Nesippaya%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,205 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Nilavuku%20En%20Mel%20Ennadi%20Kobam%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,236 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Nizharkudai%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,245 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Paalum%20Pazhavum%20%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,335 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Padaiyappa%20(1999).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,501 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Paramasivan%20Fathima%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,507 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Periya%20Marudhu%20(1994).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,521 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Ponniyin%20Selvan%202%20(2023)%20DD+5.1-%207.9GB.mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,533 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Ponniyin%20Selvan%20I%20[PS-1]%20(2022)%2010GB.mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,547 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Prince%20and%20Family%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,771 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Rail%20Payananggal%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,778 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Ramanaa%20(2002).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,779 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Ratsasan%20(2018).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,785 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Rekhachithram%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,796 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:51] "[33mGET /thumbnail/Rajaputhiran%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:51,839 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\ce58e180cdf2c427387b1bea61e2acc5.jpg
+2025-07-24 14:28:51,863 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\7107dc3b9e65b69ffb652f6bde324e2a.jpg
+2025-07-24 14:28:51,898 - INFO - Extracting metadata for Chennai City Gangsters (2025).mkv...
+2025-07-24 14:28:51,904 - INFO - Extracting metadata for Chennai Express (2013).mkv...
+2025-07-24 14:28:52,038 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Retro%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,053 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Saadhu%20(1994).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,065 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Sarangapani%20Jathakam%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,066 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Santosh%20Subramaniam%20(2008).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,093 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Single%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,110 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Sookshmadarshini%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,112 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Sri%20Sri%20Sri%20Raajavaru%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,140 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Ten%20Hours%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,141 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Subham%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,143 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Sumo%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,232 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\cde107ff92020e38ad6e5f0ab091f836.json
+2025-07-24 14:28:52,237 - INFO - Generating thumbnail for Chennai Express (2013).mkv...
+2025-07-24 14:28:52,243 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\cd89862436a17ecedbd2048184183722.json
+2025-07-24 14:28:52,243 - INFO - Generating thumbnail for Chennai City Gangsters (2025).mkv...
+2025-07-24 14:28:52,289 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\1e1bdc46fb1e4078d2eafea6ba587eed.jpg
+2025-07-24 14:28:52,293 - INFO - Extracting metadata for Court - State vs A Nobody (2025).mkv...
+2025-07-24 14:28:52,346 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Thalaikanam%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,351 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Tharunam%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,351 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Thandel%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,355 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Then%20Chennai%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,358 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/The%20Verdict%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,473 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\dbe474c2f8979d8db04edf2e144fbe8a.json
+2025-07-24 14:28:52,475 - INFO - Generating thumbnail for Court - State vs A Nobody (2025).mkv...
+2025-07-24 14:28:52,647 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Thug%20Life%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,669 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Thugs%20(2023).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,680 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Uppu%20Kappurambu%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,695 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Vaazhai%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,738 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Vaagai%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,749 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Vanangaan%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,750 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Veera%20Dheera%20Sooran%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,752 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,792 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Yaadhum%20Oore%20Yaavarum%20Kelir%20(2023).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,795 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:52] "[33mGET /thumbnail/Viduthalai%20Part%202%20(2024).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:52,882 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\cde107ff92020e38ad6e5f0ab091f836.jpg
+2025-07-24 14:28:52,894 - INFO - Extracting metadata for Demonte Colony 2 (2024).mkv...
+2025-07-24 14:28:53,044 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:53] "[33mGET /thumbnail/Yennai%20Arindhaal%20(2015).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:53,060 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:53] "[33mGET /thumbnail/Yuddhakaanda%20Chapter%202%20(2025).mkv HTTP/1.1[0m" 404 -
+2025-07-24 14:28:53,163 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\cd89862436a17ecedbd2048184183722.jpg
+2025-07-24 14:28:53,196 - INFO - Extracting metadata for Devils Double Next Level (2025).mkv...
+2025-07-24 14:28:53,260 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\3738bb2eeb8748a7a6b8383fbd621b61.json
+2025-07-24 14:28:53,264 - INFO - Generating thumbnail for Demonte Colony 2 (2024).mkv...
+2025-07-24 14:28:53,585 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\0f9b89ea9706677f1d0e94361a2f5259.json
+2025-07-24 14:28:53,590 - INFO - Generating thumbnail for Devils Double Next Level (2025).mkv...
+2025-07-24 14:28:53,973 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\dbe474c2f8979d8db04edf2e144fbe8a.jpg
+2025-07-24 14:28:53,977 - INFO - Extracting metadata for Dheena (2001).mkv...
+2025-07-24 14:28:54,346 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\b8036c21f9f33bcae91d7c0c3fccd5a4.json
+2025-07-24 14:28:54,350 - INFO - Generating thumbnail for Dheena (2001).mkv...
+2025-07-24 14:28:54,686 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\3738bb2eeb8748a7a6b8383fbd621b61.jpg
+2025-07-24 14:28:54,694 - INFO - Extracting metadata for DNA (2025).mkv...
+2025-07-24 14:28:54,703 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\0f9b89ea9706677f1d0e94361a2f5259.jpg
+2025-07-24 14:28:54,708 - INFO - Extracting metadata for Don (2022).mkv...
+2025-07-24 14:28:54,964 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ac416fb858ed3304a56122e2e2b4c879.json
+2025-07-24 14:28:54,964 - INFO - Generating thumbnail for Don (2022).mkv...
+2025-07-24 14:28:54,982 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\36ee4365b24c9f26a30b5db4d5e57d29.json
+2025-07-24 14:28:54,982 - INFO - Generating thumbnail for DNA (2025).mkv...
+2025-07-24 14:28:54,986 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\b8036c21f9f33bcae91d7c0c3fccd5a4.jpg
+2025-07-24 14:28:54,991 - INFO - Extracting metadata for Eleven (2025).mkv...
+2025-07-24 14:28:55,125 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\2a95eb5a2c89c84e59895ff6234aaf9f.json
+2025-07-24 14:28:55,126 - INFO - Generating thumbnail for Eleven (2025).mkv...
+2025-07-24 14:28:55,898 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\ac416fb858ed3304a56122e2e2b4c879.jpg
+2025-07-24 14:28:55,920 - INFO - Extracting metadata for Embiran (2019)].mkv...
+2025-07-24 14:28:56,030 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\36ee4365b24c9f26a30b5db4d5e57d29.jpg
+2025-07-24 14:28:56,048 - INFO - Extracting metadata for EMI (2025).mkv...
+2025-07-24 14:28:56,238 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\53d98c754bfa2c414731b259e584c293.json
+2025-07-24 14:28:56,239 - INFO - Generating thumbnail for Embiran (2019)].mkv...
+2025-07-24 14:28:56,255 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\2a95eb5a2c89c84e59895ff6234aaf9f.jpg
+2025-07-24 14:28:56,259 - INFO - Extracting metadata for Family Padam (2024) [Tamil [Tamil   1080p HQ HDRip   HEV~ MR.mkv...
+2025-07-24 14:28:56,283 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5143f5ff266def9396f82f0f47c449ad.json
+2025-07-24 14:28:56,284 - INFO - Generating thumbnail for EMI (2025).mkv...
+2025-07-24 14:28:56,381 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c5979b3b9e6a21cd5af62eed2c8b1f39.json
+2025-07-24 14:28:56,383 - INFO - Generating thumbnail for Family Padam (2024) [Tamil [Tamil   1080p HQ HDRip   HEV~ MR.mkv...
+2025-07-24 14:28:57,343 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "GET /metadata/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1" 200 -
+2025-07-24 14:28:57,417 - ERROR - Source file not found: 6163e239/previews/preview_0.jpg
+2025-07-24 14:28:57,418 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_0.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,430 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\53d98c754bfa2c414731b259e584c293.jpg
+2025-07-24 14:28:57,434 - INFO - Extracting metadata for Game Changer (2025) Tamil   1080p Einthusan WEB HD   HEV~ MR.mkv...
+2025-07-24 14:28:57,438 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5143f5ff266def9396f82f0f47c449ad.jpg
+2025-07-24 14:28:57,446 - INFO - Extracting metadata for Game Changer (2025).mkv...
+2025-07-24 14:28:57,457 - ERROR - Source file not found: 6163e239/previews/preview_1.jpg
+2025-07-24 14:28:57,458 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_1.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,482 - ERROR - Source file not found: 6163e239/previews/preview_2.jpg
+2025-07-24 14:28:57,483 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_2.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,489 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:57,491 - ERROR - Source file not found: 6163e239/previews/preview_3.jpg
+2025-07-24 14:28:57,493 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_3.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,507 - ERROR - Source file not found: 6163e239/previews/preview_4.jpg
+2025-07-24 14:28:57,508 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_4.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,519 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:57,528 - ERROR - Source file not found: 6163e239/previews/preview_5.jpg
+2025-07-24 14:28:57,529 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_5.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,538 - ERROR - Source file not found: 6163e239/previews/preview_6.jpg
+2025-07-24 14:28:57,541 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_6.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,562 - ERROR - Source file not found: 6163e239/previews/preview_7.jpg
+2025-07-24 14:28:57,564 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_7.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,569 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:57,573 - ERROR - Source file not found: 6163e239/previews/preview_8.jpg
+2025-07-24 14:28:57,574 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_8.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,607 - ERROR - Source file not found: 6163e239/previews/preview_9.jpg
+2025-07-24 14:28:57,608 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mHEAD /hls/6163e239/previews/preview_9.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,620 - ERROR - Source file not found: 6163e239/variants.json
+2025-07-24 14:28:57,626 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mGET /hls/6163e239/variants.json HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,667 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\58074a5e71830632edab3f4d064332b0.json
+2025-07-24 14:28:57,675 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-24 14:28:57,675 - INFO - Generating thumbnail for Game Changer (2025) Tamil   1080p Einthusan WEB HD   HEV~ MR.mkv...
+2025-07-24 14:28:57,716 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\eee8a948e5cadf767f0faf2fb5a652c3.json
+2025-07-24 14:28:57,716 - INFO - Generating thumbnail for Game Changer (2025).mkv...
+2025-07-24 14:28:57,870 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c5979b3b9e6a21cd5af62eed2c8b1f39.jpg
+2025-07-24 14:28:57,887 - INFO - Extracting metadata for Heza (2019).mkv...
+2025-07-24 14:28:58,175 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\e0e58cae665c6ba573941cc0b2bcf947.json
+2025-07-24 14:28:58,194 - INFO - Generating thumbnail for Heza (2019).mkv...
+2025-07-24 14:28:58,479 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\eee8a948e5cadf767f0faf2fb5a652c3.jpg
+2025-07-24 14:28:58,496 - INFO - Extracting metadata for HIT The Third Case (2025).mkv...
+2025-07-24 14:28:58,825 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\a6d725b668fb05390424b4e56c506b6d.json
+2025-07-24 14:28:58,825 - INFO - Generating thumbnail for HIT The Third Case (2025).mkv...
+2025-07-24 14:28:58,889 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\58074a5e71830632edab3f4d064332b0.jpg
+2025-07-24 14:28:58,904 - INFO - Extracting metadata for Holocaust (2025).mkv...
+2025-07-24 14:28:59,066 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\e0e58cae665c6ba573941cc0b2bcf947.jpg
+2025-07-24 14:28:59,070 - INFO - Extracting metadata for Iraivan (2023).mkv...
+2025-07-24 14:28:59,201 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ec5eb7f75ecb51fa5cd163d0859801d0.json
+2025-07-24 14:28:59,202 - INFO - Generating thumbnail for Holocaust (2025).mkv...
+2025-07-24 14:28:59,230 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\3092cbe853af04e4e022a1906c5b69a1.json
+2025-07-24 14:28:59,235 - INFO - Generating thumbnail for Iraivan (2023).mkv...
+2025-07-24 14:28:59,501 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\a6d725b668fb05390424b4e56c506b6d.jpg
+2025-07-24 14:28:59,511 - INFO - Extracting metadata for Japan (2023).mkv...
+2025-07-24 14:28:59,522 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:59] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:59,544 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:59] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:59,572 - INFO - 127.0.0.1 - - [24/Jul/2025 14:28:59] "[35m[1mGET /stream/Velainu%20Vandhutta%20Vellaikaaran%20(2016).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:28:59,905 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\28d1027157a81bb8e73fa09596cc0700.json
+2025-07-24 14:28:59,910 - INFO - Generating thumbnail for Japan (2023).mkv...
+2025-07-24 14:29:00,133 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\3092cbe853af04e4e022a1906c5b69a1.jpg
+2025-07-24 14:29:00,138 - INFO - Extracting metadata for Jinn - The Pet (2025).mkv...
+2025-07-24 14:29:00,182 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\ec5eb7f75ecb51fa5cd163d0859801d0.jpg
+2025-07-24 14:29:00,191 - INFO - Extracting metadata for Jora Kaiya Thattunga (2025).mkv...
+2025-07-24 14:29:00,490 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\b4aa6414b439b40bec85059be8778b51.json
+2025-07-24 14:29:00,497 - INFO - Generating thumbnail for Jinn - The Pet (2025).mkv...
+2025-07-24 14:29:00,578 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c1f2bd6e59e9d5102b5df4ee86e35c24.json
+2025-07-24 14:29:00,579 - INFO - Generating thumbnail for Jora Kaiya Thattunga (2025).mkv...
+2025-07-24 14:29:00,635 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\28d1027157a81bb8e73fa09596cc0700.jpg
+2025-07-24 14:29:00,638 - INFO - Extracting metadata for Kadhalikka Neramillai (2025).mkv...
+2025-07-24 14:29:00,902 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\d2c74fa4ba4ab4bf5b00165bf2c0b858.json
+2025-07-24 14:29:00,905 - INFO - Generating thumbnail for Kadhalikka Neramillai (2025).mkv...
+2025-07-24 14:29:01,441 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c1f2bd6e59e9d5102b5df4ee86e35c24.jpg
+2025-07-24 14:29:01,450 - INFO - Extracting metadata for Kalki 2898 AD (2024).mkv...
+2025-07-24 14:29:01,487 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\b4aa6414b439b40bec85059be8778b51.jpg
+2025-07-24 14:29:01,499 - INFO - Extracting metadata for Kudumbasthan (2025).mkv...
+2025-07-24 14:29:01,829 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\0bd0a06fb941877831fd3e7840607dac.json
+2025-07-24 14:29:01,836 - INFO - Generating thumbnail for Kalki 2898 AD (2024).mkv...
+2025-07-24 14:29:01,893 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\7c4a11d89e2ab675359be9c1e18a5103.json
+2025-07-24 14:29:01,894 - INFO - Generating thumbnail for Kudumbasthan (2025).mkv...
+2025-07-24 14:29:01,910 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\d2c74fa4ba4ab4bf5b00165bf2c0b858.jpg
+2025-07-24 14:29:01,913 - INFO - Extracting metadata for Kumbaari (2024).mkv...
+2025-07-24 14:29:02,261 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\00104c841a3398141a9e13a372c0c64a.json
+2025-07-24 14:29:02,263 - INFO - Generating thumbnail for Kumbaari (2024).mkv...
+2025-07-24 14:29:02,738 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\0bd0a06fb941877831fd3e7840607dac.jpg
+2025-07-24 14:29:02,744 - INFO - Extracting metadata for Lal Salaam (Extended Version) (2024).mkv...
+2025-07-24 14:29:02,759 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\7c4a11d89e2ab675359be9c1e18a5103.jpg
+2025-07-24 14:29:02,764 - INFO - Extracting metadata for Maaman (2025).mkv...
+2025-07-24 14:29:03,013 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\4c3b0b5788fb94d5cf019e446959bc35.json
+2025-07-24 14:29:03,016 - INFO - Generating thumbnail for Maaman (2025).mkv...
+2025-07-24 14:29:03,084 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\576b65bbabca75ec59c4607cce36a68a.json
+2025-07-24 14:29:03,084 - INFO - Generating thumbnail for Lal Salaam (Extended Version) (2024).mkv...
+2025-07-24 14:29:03,409 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\00104c841a3398141a9e13a372c0c64a.jpg
+2025-07-24 14:29:03,413 - INFO - Extracting metadata for Maaveeran (2023).mkv...
+2025-07-24 14:29:03,713 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\cbc667e6141e1271758b5e200906d8b1.json
+2025-07-24 14:29:03,714 - INFO - Generating thumbnail for Maaveeran (2023).mkv...
+2025-07-24 14:29:03,952 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\576b65bbabca75ec59c4607cce36a68a.jpg
+2025-07-24 14:29:03,955 - INFO - Extracting metadata for Madha Gaja Raja (2025).mkv...
+2025-07-24 14:29:04,257 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\4c3b0b5788fb94d5cf019e446959bc35.jpg
+2025-07-24 14:29:04,267 - INFO - Extracting metadata for Madras Matinee (2025).mkv...
+2025-07-24 14:29:04,309 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c2c8b5094148749ee61a59ecde58600c.json
+2025-07-24 14:29:04,309 - INFO - Generating thumbnail for Madha Gaja Raja (2025).mkv...
+2025-07-24 14:29:04,312 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\cbc667e6141e1271758b5e200906d8b1.jpg
+2025-07-24 14:29:04,317 - INFO - Extracting metadata for Madraskaaran (2025).mkv...
+2025-07-24 14:29:04,381 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\12cd099623a1c2a14de33805a768eda4.json
+2025-07-24 14:29:04,381 - INFO - Generating thumbnail for Madras Matinee (2025).mkv...
+2025-07-24 14:29:04,427 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\3ef39ab1efcff790c3c721a8273d8b77.json
+2025-07-24 14:29:04,428 - INFO - Generating thumbnail for Madraskaaran (2025).mkv...
+2025-07-24 14:29:05,301 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\12cd099623a1c2a14de33805a768eda4.jpg
+2025-07-24 14:29:05,307 - INFO - Extracting metadata for Manithan (2016).mkv...
+2025-07-24 14:29:05,313 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c2c8b5094148749ee61a59ecde58600c.jpg
+2025-07-24 14:29:05,318 - INFO - Extracting metadata for Maranamass (2025).mkv...
+2025-07-24 14:29:05,486 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5c31da3c0675e78430c64db74e490d7b.json
+2025-07-24 14:29:05,486 - INFO - Generating thumbnail for Maranamass (2025).mkv...
+2025-07-24 14:29:05,500 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\3ef39ab1efcff790c3c721a8273d8b77.jpg
+2025-07-24 14:29:05,503 - INFO - Extracting metadata for Moonwalk (2025).mkv...
+2025-07-24 14:29:05,553 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\0b6cbadc01d8a7563662131b7fe51e74.json
+2025-07-24 14:29:05,553 - INFO - Generating thumbnail for Manithan (2016).mkv...
+2025-07-24 14:29:05,608 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5f6dbddffdcc7bc9b5f6f7a5669a3379.json
+2025-07-24 14:29:05,609 - INFO - Generating thumbnail for Moonwalk (2025).mkv...
+2025-07-24 14:29:06,305 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\0b6cbadc01d8a7563662131b7fe51e74.jpg
+2025-07-24 14:29:06,312 - INFO - Extracting metadata for Mr. Housekeeping (2025).mkv...
+2025-07-24 14:29:06,402 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5f6dbddffdcc7bc9b5f6f7a5669a3379.jpg
+2025-07-24 14:29:06,407 - INFO - Extracting metadata for Nanban Oruvan Vandha Piragu (2024).mkv...
+2025-07-24 14:29:06,484 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5c31da3c0675e78430c64db74e490d7b.jpg
+2025-07-24 14:29:06,488 - INFO - Extracting metadata for Narivetta (2025).mkv...
+2025-07-24 14:29:06,510 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\e46ef65702f4cb691c4b6befea15294b.json
+2025-07-24 14:29:06,510 - INFO - Generating thumbnail for Nanban Oruvan Vandha Piragu (2024).mkv...
+2025-07-24 14:29:06,574 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5ef6f4c14a58e5164c65419c859d9720.json
+2025-07-24 14:29:06,574 - INFO - Generating thumbnail for Mr. Housekeeping (2025).mkv...
+2025-07-24 14:29:06,583 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5e82f8894c432a450c75d1aaea6e8580.json
+2025-07-24 14:29:06,583 - INFO - Generating thumbnail for Narivetta (2025).mkv...
+2025-07-24 14:29:07,271 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\e46ef65702f4cb691c4b6befea15294b.jpg
+2025-07-24 14:29:07,280 - INFO - Extracting metadata for Neram (2013).m4v...
+2025-07-24 14:29:07,482 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5e82f8894c432a450c75d1aaea6e8580.jpg
+2025-07-24 14:29:07,484 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5ef6f4c14a58e5164c65419c859d9720.jpg
+2025-07-24 14:29:07,485 - INFO - Extracting metadata for Nesippaya (2025).mkv...
+2025-07-24 14:29:07,488 - INFO - Extracting metadata for Nilavuku En Mel Ennadi Kobam (2025).mkv...
+2025-07-24 14:29:07,581 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\9f33d506937cf8f197ce8f84ce7a30cf.json
+2025-07-24 14:29:07,582 - INFO - Generating thumbnail for Nesippaya (2025).mkv...
+2025-07-24 14:29:07,596 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\beef99957b66a8a44b81ee2b3bd41832.json
+2025-07-24 14:29:07,597 - INFO - Generating thumbnail for Nilavuku En Mel Ennadi Kobam (2025).mkv...
+2025-07-24 14:29:07,752 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\4bb2da1243a70ca4779ff4b643f02c56.json
+2025-07-24 14:29:07,752 - INFO - Generating thumbnail for Neram (2013).m4v...
+2025-07-24 14:29:08,174 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\beef99957b66a8a44b81ee2b3bd41832.jpg
+2025-07-24 14:29:08,184 - INFO - Extracting metadata for Nizharkudai (2025).mkv...
+2025-07-24 14:29:08,351 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\9f33d506937cf8f197ce8f84ce7a30cf.jpg
+2025-07-24 14:29:08,354 - INFO - Extracting metadata for Paalum Pazhavum  (2025).mkv...
+2025-07-24 14:29:08,360 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\062115b4fd37eba34cf07109a8db3951.json
+2025-07-24 14:29:08,360 - INFO - Generating thumbnail for Nizharkudai (2025).mkv...
+2025-07-24 14:29:08,470 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\254cbccb298d0a7ca358a754db2c4364.json
+2025-07-24 14:29:08,471 - INFO - Generating thumbnail for Paalum Pazhavum  (2025).mkv...
+2025-07-24 14:29:08,971 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\062115b4fd37eba34cf07109a8db3951.jpg
+2025-07-24 14:29:08,974 - INFO - Extracting metadata for Padaiyappa (1999).mkv...
+2025-07-24 14:29:09,134 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\d14c0081ec44971099e190e6606b4afc.json
+2025-07-24 14:29:09,143 - INFO - Generating thumbnail for Padaiyappa (1999).mkv...
+2025-07-24 14:29:09,399 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\254cbccb298d0a7ca358a754db2c4364.jpg
+2025-07-24 14:29:09,402 - INFO - Extracting metadata for Paramasivan Fathima (2025).mkv...
+2025-07-24 14:29:09,528 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\4bb2da1243a70ca4779ff4b643f02c56.jpg
+2025-07-24 14:29:09,533 - INFO - Extracting metadata for Periya Marudhu (1994).mkv...
+2025-07-24 14:29:09,578 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\3b41d9c7f9b2eb9985e4a30914013a45.json
+2025-07-24 14:29:09,579 - INFO - Generating thumbnail for Paramasivan Fathima (2025).mkv...
+2025-07-24 14:29:09,751 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\9f537fd395ace788d01f89493dbc1645.json
+2025-07-24 14:29:09,751 - INFO - Generating thumbnail for Periya Marudhu (1994).mkv...
+2025-07-24 14:29:10,169 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\3b41d9c7f9b2eb9985e4a30914013a45.jpg
+2025-07-24 14:29:10,173 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\d14c0081ec44971099e190e6606b4afc.jpg
+2025-07-24 14:29:10,174 - INFO - Extracting metadata for Ponniyin Selvan 2 (2023) DD+5.1- 7.9GB.mkv...
+2025-07-24 14:29:10,185 - INFO - Extracting metadata for Ponniyin Selvan I [PS-1] (2022) 10GB.mkv...
+2025-07-24 14:29:10,351 - ERROR - Unexpected error extracting metadata: the JSON object must be str, bytes or bytearray, not NoneType
+2025-07-24 14:29:10,351 - WARNING - Failed to extract metadata for Ponniyin Selvan 2 (2023) DD+5.1- 7.9GB.mkv
+2025-07-24 14:29:10,351 - INFO - Generating thumbnail for Ponniyin Selvan 2 (2023) DD+5.1- 7.9GB.mkv...
+2025-07-24 14:29:10,445 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c4619618375bed0d650ff4239207e360.json
+2025-07-24 14:29:10,445 - INFO - Generating thumbnail for Ponniyin Selvan I [PS-1] (2022) 10GB.mkv...
+2025-07-24 14:29:10,786 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\9f537fd395ace788d01f89493dbc1645.jpg
+2025-07-24 14:29:10,788 - INFO - Extracting metadata for Prince and Family (2025).mkv...
+2025-07-24 14:29:11,092 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c4619618375bed0d650ff4239207e360.jpg
+2025-07-24 14:29:11,094 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\48780a7ae5b0ff7d03d8df95a48666b9.json
+2025-07-24 14:29:11,094 - INFO - Generating thumbnail for Prince and Family (2025).mkv...
+2025-07-24 14:29:11,096 - INFO - Extracting metadata for Rail Payananggal (2024).mkv...
+2025-07-24 14:29:11,201 - INFO - 10.223.84.143 - - [24/Jul/2025 14:29:11] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:29:11,244 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ea9d423b2a02dc01cf9f24ace6152082.json
+2025-07-24 14:29:11,244 - INFO - Generating thumbnail for Rail Payananggal (2024).mkv...
+2025-07-24 14:29:11,356 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\2373f77b5910d7a2aa2a2d3277618a09.jpg
+2025-07-24 14:29:11,359 - INFO - Extracting metadata for Rajaputhiran (2025).mkv...
+2025-07-24 14:29:11,688 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\687b9585827eb6b1ce1267f5426ff59b.json
+2025-07-24 14:29:11,688 - INFO - Generating thumbnail for Rajaputhiran (2025).mkv...
+2025-07-24 14:29:12,057 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\48780a7ae5b0ff7d03d8df95a48666b9.jpg
+2025-07-24 14:29:12,061 - INFO - Extracting metadata for Ramanaa (2002).mkv...
+2025-07-24 14:29:12,118 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\ea9d423b2a02dc01cf9f24ace6152082.jpg
+2025-07-24 14:29:12,121 - INFO - Extracting metadata for Ratsasan (2018).mkv...
+2025-07-24 14:29:12,291 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\0c03d74b38ee7fcbe4b20937adb25265.json
+2025-07-24 14:29:12,293 - INFO - Generating thumbnail for Ramanaa (2002).mkv...
+2025-07-24 14:29:12,299 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5e0e95c56a7bc47dd6fcee2f957bee38.json
+2025-07-24 14:29:12,302 - INFO - Generating thumbnail for Ratsasan (2018).mkv...
+2025-07-24 14:29:12,974 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\687b9585827eb6b1ce1267f5426ff59b.jpg
+2025-07-24 14:29:12,979 - INFO - Extracting metadata for Rekhachithram (2025).mkv...
+2025-07-24 14:29:13,228 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5e0e95c56a7bc47dd6fcee2f957bee38.jpg
+2025-07-24 14:29:13,232 - INFO - Extracting metadata for Retro (2025).mkv...
+2025-07-24 14:29:13,311 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\23b0afe5cb00a7116e18977783b2efd2.json
+2025-07-24 14:29:13,311 - INFO - Generating thumbnail for Rekhachithram (2025).mkv...
+2025-07-24 14:29:13,338 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\0c03d74b38ee7fcbe4b20937adb25265.jpg
+2025-07-24 14:29:13,341 - INFO - Extracting metadata for Saadhu (1994).mkv...
+2025-07-24 14:29:13,448 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\48d8bbc539a069f518e45ed0fed76a4a.json
+2025-07-24 14:29:13,450 - INFO - Generating thumbnail for Retro (2025).mkv...
+2025-07-24 14:29:13,465 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\bbdf2e885db40084906ce1ed14f0e281.json
+2025-07-24 14:29:13,466 - INFO - Generating thumbnail for Saadhu (1994).mkv...
+2025-07-24 14:29:14,276 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\48d8bbc539a069f518e45ed0fed76a4a.jpg
+2025-07-24 14:29:14,280 - INFO - Extracting metadata for Santosh Subramaniam (2008).mkv...
+2025-07-24 14:29:14,287 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\23b0afe5cb00a7116e18977783b2efd2.jpg
+2025-07-24 14:29:14,291 - INFO - Extracting metadata for Sarangapani Jathakam (2024).mkv...
+2025-07-24 14:29:14,312 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\bbdf2e885db40084906ce1ed14f0e281.jpg
+2025-07-24 14:29:14,315 - INFO - Extracting metadata for Single (2025).mkv...
+2025-07-24 14:29:14,390 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\eecc78c0fadc8fda99028d64e2770063.json
+2025-07-24 14:29:14,390 - INFO - Generating thumbnail for Sarangapani Jathakam (2024).mkv...
+2025-07-24 14:29:14,417 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\175c81e8478a9ad9c9bc6ac50d9c1661.json
+2025-07-24 14:29:14,417 - INFO - Generating thumbnail for Santosh Subramaniam (2008).mkv...
+2025-07-24 14:29:14,436 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\41dc2003ae693b884e677f07497a26a9.json
+2025-07-24 14:29:14,436 - INFO - Generating thumbnail for Single (2025).mkv...
+2025-07-24 14:29:15,234 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\eecc78c0fadc8fda99028d64e2770063.jpg
+2025-07-24 14:29:15,237 - INFO - Extracting metadata for Sookshmadarshini (2024).mkv...
+2025-07-24 14:29:15,256 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\41dc2003ae693b884e677f07497a26a9.jpg
+2025-07-24 14:29:15,258 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\175c81e8478a9ad9c9bc6ac50d9c1661.jpg
+2025-07-24 14:29:15,260 - INFO - Extracting metadata for Sri Sri Sri Raajavaru (2025).mkv...
+2025-07-24 14:29:15,263 - INFO - Extracting metadata for Subham (2025).mkv...
+2025-07-24 14:29:15,363 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\23f33402c62a00de6d3fc92bc6f35661.json
+2025-07-24 14:29:15,364 - INFO - Generating thumbnail for Subham (2025).mkv...
+2025-07-24 14:29:15,368 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\b9be55607ede80abd116eb45f0eaa430.json
+2025-07-24 14:29:15,368 - INFO - Generating thumbnail for Sri Sri Sri Raajavaru (2025).mkv...
+2025-07-24 14:29:15,416 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\516746b31d80c7622ef43d07ed0f916c.json
+2025-07-24 14:29:15,416 - INFO - Generating thumbnail for Sookshmadarshini (2024).mkv...
+2025-07-24 14:29:16,017 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\23f33402c62a00de6d3fc92bc6f35661.jpg
+2025-07-24 14:29:16,021 - INFO - Extracting metadata for Sumo (2025).mkv...
+2025-07-24 14:29:16,035 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\b9be55607ede80abd116eb45f0eaa430.jpg
+2025-07-24 14:29:16,040 - INFO - Extracting metadata for Ten Hours (2024).mkv...
+2025-07-24 14:29:16,153 - ERROR - Error extracting metadata from E:\Videos\Kollywood\Sumo (2025).mkv: Command '['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', '-show_streams', 'E:\\Videos\\Kollywood\\Sumo (2025).mkv']' returned non-zero exit status 1.
+2025-07-24 14:29:16,154 - WARNING - Failed to extract metadata for Sumo (2025).mkv
+2025-07-24 14:29:16,154 - INFO - Generating thumbnail for Sumo (2025).mkv...
+2025-07-24 14:29:16,177 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\935c91de582773b569c941018d8cb592.json
+2025-07-24 14:29:16,177 - INFO - Generating thumbnail for Ten Hours (2024).mkv...
+2025-07-24 14:29:16,999 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\b5908281da224791a8b087e7a98b61d5.jpg
+2025-07-24 14:29:17,004 - INFO - Extracting metadata for Thalaikanam (2024).mkv...
+2025-07-24 14:29:17,025 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\516746b31d80c7622ef43d07ed0f916c.jpg
+2025-07-24 14:29:17,029 - INFO - Extracting metadata for Thandel (2025).mkv...
+2025-07-24 14:29:17,054 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\935c91de582773b569c941018d8cb592.jpg
+2025-07-24 14:29:17,058 - INFO - Extracting metadata for Tharunam (2025).mkv...
+2025-07-24 14:29:17,133 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\a39b862ce675c1d79b9ab026ab1c1eee.json
+2025-07-24 14:29:17,133 - INFO - Generating thumbnail for Thalaikanam (2024).mkv...
+2025-07-24 14:29:17,148 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5ebb929afef879b9c8334c7dbc87042b.json
+2025-07-24 14:29:17,148 - INFO - Generating thumbnail for Thandel (2025).mkv...
+2025-07-24 14:29:17,172 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\3a274bb67760c78b170d09d0e82493ab.json
+2025-07-24 14:29:17,173 - INFO - Generating thumbnail for Tharunam (2025).mkv...
+2025-07-24 14:29:18,217 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5ebb929afef879b9c8334c7dbc87042b.jpg
+2025-07-24 14:29:18,217 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\a39b862ce675c1d79b9ab026ab1c1eee.jpg
+2025-07-24 14:29:18,222 - INFO - Extracting metadata for The Verdict (2025).mkv...
+2025-07-24 14:29:18,223 - INFO - Extracting metadata for Then Chennai (2024).mkv...
+2025-07-24 14:29:18,249 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\3a274bb67760c78b170d09d0e82493ab.jpg
+2025-07-24 14:29:18,254 - INFO - Extracting metadata for Thug Life (2025).mkv...
+2025-07-24 14:29:18,362 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\9d3fb627e710435f1d78049f971d4345.json
+2025-07-24 14:29:18,363 - INFO - Generating thumbnail for The Verdict (2025).mkv...
+2025-07-24 14:29:18,443 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\5fd56c9b90037743971a1e832c1a38ea.json
+2025-07-24 14:29:18,444 - INFO - Generating thumbnail for Then Chennai (2024).mkv...
+2025-07-24 14:29:18,461 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\454cc1c0f5f026197053b847008b6e8a.json
+2025-07-24 14:29:18,461 - INFO - Generating thumbnail for Thug Life (2025).mkv...
+2025-07-24 14:29:19,409 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\9d3fb627e710435f1d78049f971d4345.jpg
+2025-07-24 14:29:19,414 - INFO - Extracting metadata for Thugs (2023).mkv...
+2025-07-24 14:29:19,495 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\454cc1c0f5f026197053b847008b6e8a.jpg
+2025-07-24 14:29:19,501 - INFO - Extracting metadata for Uppu Kappurambu (2025).mkv...
+2025-07-24 14:29:19,513 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\5fd56c9b90037743971a1e832c1a38ea.jpg
+2025-07-24 14:29:19,518 - INFO - Extracting metadata for Vaagai (2024).mkv...
+2025-07-24 14:29:19,591 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\99959bb83b1821f71cb5aecbaea7951a.json
+2025-07-24 14:29:19,592 - INFO - Generating thumbnail for Thugs (2023).mkv...
+2025-07-24 14:29:19,614 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\9be77fc097aec8e17a17c6e4820c3faf.json
+2025-07-24 14:29:19,614 - INFO - Generating thumbnail for Uppu Kappurambu (2025).mkv...
+2025-07-24 14:29:19,635 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\cce2d4dbc406f72bd98a15cae5ba8634.json
+2025-07-24 14:29:19,635 - INFO - Generating thumbnail for Vaagai (2024).mkv...
+2025-07-24 14:29:20,474 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\99959bb83b1821f71cb5aecbaea7951a.jpg
+2025-07-24 14:29:20,506 - INFO - Extracting metadata for Vaazhai (2024).mkv...
+2025-07-24 14:29:20,596 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\cce2d4dbc406f72bd98a15cae5ba8634.jpg
+2025-07-24 14:29:20,600 - INFO - Extracting metadata for Vanangaan (2025).mkv...
+2025-07-24 14:29:20,687 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c770c72a14ea1f35727ab88028d409da.json
+2025-07-24 14:29:20,687 - INFO - Generating thumbnail for Vaazhai (2024).mkv...
+2025-07-24 14:29:20,708 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\9be77fc097aec8e17a17c6e4820c3faf.jpg
+2025-07-24 14:29:20,712 - INFO - Extracting metadata for Veera Dheera Sooran (2025).mkv...
+2025-07-24 14:29:20,723 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\c7f0e58ddc936122dcb4d898d6e27b55.json
+2025-07-24 14:29:20,724 - INFO - Generating thumbnail for Vanangaan (2025).mkv...
+2025-07-24 14:29:20,968 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\dcdfd61566e10b298af1400530a5f1b2.json
+2025-07-24 14:29:20,978 - INFO - Generating thumbnail for Veera Dheera Sooran (2025).mkv...
+2025-07-24 14:29:21,289 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c7f0e58ddc936122dcb4d898d6e27b55.jpg
+2025-07-24 14:29:21,294 - INFO - Generating thumbnail for Velainu Vandhutta Vellaikaaran (2016).mkv...
+2025-07-24 14:29:21,348 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\c770c72a14ea1f35727ab88028d409da.jpg
+2025-07-24 14:29:21,352 - INFO - Extracting metadata for Viduthalai Part 2 (2024).mkv...
+2025-07-24 14:29:21,779 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\d34c1f5b7242703dd7a34c9f0d4c851e.json
+2025-07-24 14:29:21,782 - INFO - Generating thumbnail for Viduthalai Part 2 (2024).mkv...
+2025-07-24 14:29:21,863 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\dcdfd61566e10b298af1400530a5f1b2.jpg
+2025-07-24 14:29:21,873 - INFO - Extracting metadata for Yaadhum Oore Yaavarum Kelir (2023).mkv...
+2025-07-24 14:29:21,934 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\387aeeb58f6a0cf7312364a5191ac0fd.jpg
+2025-07-24 14:29:21,937 - INFO - Extracting metadata for Yennai Arindhaal (2015).mkv...
+2025-07-24 14:29:21,984 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\2fd8cd74674f77ae4ef6af5cf61b0cd3.json
+2025-07-24 14:29:21,984 - INFO - Generating thumbnail for Yaadhum Oore Yaavarum Kelir (2023).mkv...
+2025-07-24 14:29:22,184 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\edf639a448b22ac3384ebb12f649b85a.json
+2025-07-24 14:29:22,188 - INFO - Generating thumbnail for Yennai Arindhaal (2015).mkv...
+2025-07-24 14:29:22,562 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\d34c1f5b7242703dd7a34c9f0d4c851e.jpg
+2025-07-24 14:29:22,562 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\2fd8cd74674f77ae4ef6af5cf61b0cd3.jpg
+2025-07-24 14:29:22,566 - INFO - Extracting metadata for Yuddhakaanda Chapter 2 (2025).mkv...
+2025-07-24 14:29:22,896 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\1c3719078c857f3b2ffb2b620d2df380.json
+2025-07-24 14:29:22,896 - INFO - Generating thumbnail for Yuddhakaanda Chapter 2 (2025).mkv...
+2025-07-24 14:29:22,914 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\edf639a448b22ac3384ebb12f649b85a.jpg
+2025-07-24 14:29:23,257 - INFO - Thumbnail generated: D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\thumbnails\1c3719078c857f3b2ffb2b620d2df380.jpg
+2025-07-24 14:29:26,587 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:26] "GET /files HTTP/1.1" 200 -
+2025-07-24 14:29:33,501 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /?id=9f26202f-79b4-493b-afeb-64864ad1dfe3&vscodeBrowserReqId=1753347573493 HTTP/1.1" 200 -
+2025-07-24 14:29:33,521 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "[36mGET /static/css/client_style.css HTTP/1.1[0m" 304 -
+2025-07-24 14:29:33,521 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "[36mGET /static/css/modern-player.css HTTP/1.1[0m" 304 -
+2025-07-24 14:29:33,538 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /files HTTP/1.1" 200 -
+2025-07-24 14:29:33,583 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/Amaithi%20Padai%20(1994).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:33,583 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/3%20(Three)%20(2012).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:33,583 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/Azadi%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:33,584 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/Aaragan%20(2024).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:33,584 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/Ace%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:33,584 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:33] "GET /thumbnail/Adhagappattathu%20Magajanangalay%20(2017).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,617 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Barroz%20(2024).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,618 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Billa%20(2007).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,618 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Baby%20and%20Baby%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,874 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Blind%20Spot%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,874 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Bromance%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:34,875 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:34] "GET /thumbnail/Captain%20Miller%20(2024).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,138 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Chennai%20City%20Gangsters%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,138 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Chennai%20Express%20(2013).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,139 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Court%20-%20State%20vs%20A%20Nobody%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,194 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Demonte%20Colony%202%20(2024).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,194 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Devils%20Double%20Next%20Level%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,194 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Dheena%20(2001).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,461 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/DNA%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,462 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Don%20(2022).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,463 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Eleven%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,493 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Embiran%20(2019)].mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,494 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/EMI%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,495 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Family%20Padam%20(2024)%20[Tamil%20[Tamil%20%20%201080p%20HQ%20HDRip%20%20%20HEV~%20MR.mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,764 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Game%20Changer%20(2025)%20Tamil%20%20%201080p%20Einthusan%20WEB%20HD%20%20%20HEV~%20MR.mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,764 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Game%20Changer%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,765 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Heza%20(2019).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,826 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/HIT%20The%20Third%20Case%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,826 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Holocaust%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:35,827 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:35] "GET /thumbnail/Iraivan%20(2023).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:36,085 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:36] "GET /thumbnail/Jinn%20-%20The%20Pet%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:36,085 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:36] "GET /thumbnail/Japan%20(2023).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:36,085 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:36] "GET /thumbnail/Jora%20Kaiya%20Thattunga%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:37,922 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:37] "GET /metadata/Holocaust%20(2025).mkv HTTP/1.1" 200 -
+2025-07-24 14:29:37,980 - ERROR - Source file not found: 3b13e9e1/previews/preview_0.jpg
+2025-07-24 14:29:37,980 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:37] "[33mHEAD /hls/3b13e9e1/previews/preview_0.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:37,988 - ERROR - Source file not found: 3b13e9e1/previews/preview_1.jpg
+2025-07-24 14:29:37,989 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:37] "[33mHEAD /hls/3b13e9e1/previews/preview_1.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,012 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[35m[1mGET /stream/Holocaust%20(2025).mkv HTTP/1.1[0m" 206 -
+2025-07-24 14:29:38,012 - ERROR - Source file not found: 3b13e9e1/previews/preview_2.jpg
+2025-07-24 14:29:38,013 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_2.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,020 - ERROR - Source file not found: 3b13e9e1/previews/preview_3.jpg
+2025-07-24 14:29:38,020 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_3.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,029 - ERROR - Source file not found: 3b13e9e1/previews/preview_4.jpg
+2025-07-24 14:29:38,029 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_4.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,034 - ERROR - Source file not found: 3b13e9e1/previews/preview_5.jpg
+2025-07-24 14:29:38,034 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_5.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,038 - ERROR - Source file not found: 3b13e9e1/previews/preview_6.jpg
+2025-07-24 14:29:38,038 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_6.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,042 - ERROR - Source file not found: 3b13e9e1/previews/preview_7.jpg
+2025-07-24 14:29:38,042 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_7.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,046 - ERROR - Source file not found: 3b13e9e1/previews/preview_8.jpg
+2025-07-24 14:29:38,046 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_8.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,056 - INFO - HLS not found, generating for: Holocaust (2025).mkv
+2025-07-24 14:29:38,058 - INFO - Extracting metadata for Holocaust (2025).mkv...
+2025-07-24 14:29:38,065 - ERROR - Source file not found: 3b13e9e1/previews/preview_9.jpg
+2025-07-24 14:29:38,066 - INFO - 127.0.0.1 - - [24/Jul/2025 14:29:38] "[33mHEAD /hls/3b13e9e1/previews/preview_9.jpg HTTP/1.1[0m" 404 -
+2025-07-24 14:29:38,155 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ec5eb7f75ecb51fa5cd163d0859801d0.json
+2025-07-24 14:29:38,156 - INFO - Thumbnail already exists for Holocaust (2025).mkv.
+2025-07-24 14:29:38,156 - INFO - Generating HLS for Holocaust (2025).mkv...
+2025-07-24 14:29:38,220 - INFO - Using NVIDIA hardware acceleration
+2025-07-24 14:29:41,160 - INFO - 10.223.84.143 - - [24/Jul/2025 14:29:41] "GET /api/system HTTP/1.1" 200 -
+2025-07-24 14:29:58,058 - INFO - HLS not found, generating for: Holocaust (2025).mkv
+2025-07-24 14:29:58,060 - INFO - Extracting metadata for Holocaust (2025).mkv...
+2025-07-24 14:29:58,169 - INFO - Metadata saved to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\metadata\ec5eb7f75ecb51fa5cd163d0859801d0.json
+2025-07-24 14:29:58,170 - INFO - Thumbnail already exists for Holocaust (2025).mkv.
+2025-07-24 14:29:58,170 - INFO - Generating HLS for Holocaust (2025).mkv...
+2025-07-24 14:29:58,234 - INFO - Using NVIDIA hardware acceleration
+2025-07-24 14:30:01,427 - INFO - Extracted subtitle track 3 to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\hls\ec5eb7f75ecb51fa5cd163d0859801d0\subtitle_3.vtt
+2025-07-24 14:30:01,427 - INFO - Extracted subtitle track 3 to D:\Documents\Projects\FileTransfer\FilesFlix-Backup\FilesFlix\cache\hls\ec5eb7f75ecb51fa5cd163d0859801d0\subtitle_3.vtt
+2025-07-24 14:30:01,524 - INFO - 127.0.0.1 - - [24/Jul/2025 14:30:01] "[32mGET /api/system HTTP/1.1[0m" 302 -
