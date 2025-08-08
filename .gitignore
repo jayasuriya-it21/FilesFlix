@@ -1,2 +1,25 @@
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cache directories
+cache/
 /cache
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+tmp/
+temp/
+
+# OS
+.DS_Store
+Thumbs.db
