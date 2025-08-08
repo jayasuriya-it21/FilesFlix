@@ -64,10 +64,28 @@ FilesFlix is a modern, Netflix-inspired personal media streaming server built wi
    - **Host Dashboard**: http://localhost:5000/host
 
 ### Default Credentials
-- **Username**: `admin`
-- **Password**: `password123`
+
+⚠️ **Security Notice**: Change these default credentials before deploying to production!
+
+- **Username**: Set via `HOST_USERNAME` environment variable (default: `admin`)
+- **Password**: Set via `HOST_PASSWORD` environment variable (default: `password123`)
 
 ## 🔧 Configuration
+
+### Environment Variables
+
+FilesFlix now uses environment variables for secure configuration. Copy `.env.example` to `.env` and update the values:
+
+```bash
+cp .env.example .env
+# Edit .env with your preferred settings
+```
+
+Key settings:
+- `SECRET_KEY` - Flask secret key (auto-generated if not set)
+- `HOST_USERNAME` - Admin username (default: admin) 
+- `HOST_PASSWORD` - Admin password (default: password123)
+- `MEDIA_DIRECTORY` - Your media directory path
 
 ### Media Directory
 By default, FilesFlix serves media from its own directory. To change this:
@@ -142,6 +160,18 @@ FilesFlix/
 - **Input Validation**: Sanitized file paths and user inputs
 - **Secure Headers**: HTTP security headers
 - **Admin-only Access**: Protected host dashboard
+
+## 🛡️ Security Features
+
+- **Path Traversal Protection**: Comprehensive validation prevents directory traversal attacks
+- **Secure Authentication**: Constant-time password comparison prevents timing attacks
+- **Environment-based Configuration**: Sensitive settings use environment variables
+- **HTTP Security Headers**: Protection against clickjacking, XSS, and MIME sniffing
+- **Input Validation**: Sanitized file paths and user inputs
+- **Resource Management**: Proper timeouts and cleanup prevent resource exhaustion
+- **Admin-only Access**: Protected host dashboard with session management
+
+For detailed security information, see [SECURITY.md](SECURITY.md).
 
 ## 📱 Browser Compatibility
 

@@ -21,6 +21,14 @@ from utils import generate_thumbnail_and_hls, get_hls_path, get_thumbnail_path, 
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Enable response compression for better performance
+try:
+    from flask_compress import Compress
+    Compress(app)
+except ImportError:
+    # Compression not available, continue without it
+    logging.info("Flask-Compress not available. Install for better performance: pip install Flask-Compress")
+
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -121,6 +129,19 @@ def start_watcher(path):
     except Exception as e:
         logging.warning(f"Failed to start file watcher (this is non-critical): {e}")
         logging.info("File watcher disabled. New files will be processed on demand.")
+
+@app.after_request
+def add_security_headers(response):
+    """Add security headers to all responses"""
+    # Prevent clickjacking
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    # Prevent MIME type sniffing
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    # Enable XSS protection
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    # Referrer policy
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    return response
 
 def get_system_info():
     """Get system information"""
