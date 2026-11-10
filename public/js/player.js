@@ -57,6 +57,8 @@
   const pGear = $('pGear');
   const pFs = $('pFs');
   const pMenu = $('pMenu');
+  const pLock = $('pLock');
+  const pUnlock = $('pUnlock');
 
   /* ---------- inline SVG icons (1.8–2px stroke, 24 viewBox) ---------- */
 
@@ -102,6 +104,79 @@
   let lastMenuCloseAt = 0;
   let loadGen = 0;
   let activeAbortController = null;
+  let locked = false;
+  let subtitleDelay = 0;
+  let gesture = null;
+  let lastResumeSave = 0;
+  const cueTimes = new WeakMap();
+  const PREF_KEY = 'fileflix.player.preferences';
+  const RESUME_KEY = 'fileflix.player.resume';
+
+  function readStored(key, fallback) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key));
+      return value && typeof value === 'object' && !Array.isArray(value) ? value : fallback;
+    } catch (_) { return fallback; }
+  }
+  function writeStored(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* storage may be blocked/full */ }
+  }
+  const preferences = readStored(PREF_KEY, {});
+  function savePreferences() {
+    writeStored(PREF_KEY, {
+      volume: video.volume, muted: video.muted, speed: video.playbackRate,
+      aspect: preferences.aspect || 'contain', subtitleSize: preferences.subtitleSize || 100
+    });
+  }
+  function saveResume() {
+    if (!current || !session || video.readyState < 1) return;
+    const time = currentVirtualTime(), duration = effectiveDuration();
+    if (!Number.isFinite(time) || !Number.isFinite(duration)) return;
+    const records = readStored(RESUME_KEY, {});
+    if (video.ended || time < 10 || duration - time < 15) delete records[current.rel];
+    else records[current.rel] = { time, duration, saved: Date.now() };
+    const recent = Object.entries(records).filter(([, value]) => value && Number.isFinite(value.saved))
+      .sort((a, b) => b[1].saved - a[1].saved).slice(0, 100);
+    writeStored(RESUME_KEY, Object.fromEntries(recent));
+  }
+  function resumePosition(rel) {
+    const record = readStored(RESUME_KEY, {})[rel];
+    return record && Number.isFinite(record.time) && record.time >= 10 &&
+      Number.isFinite(record.duration) && record.duration - record.time >= 15 ? record.time : 0;
+  }
+  function setLocked(value) {
+    locked = value;
+    closeMenu(false);
+    controls.inert = value;
+    pTop.inert = value;
+    centerMsg.inert = value;
+    shell.classList.toggle('locked', value);
+    pUnlock.hidden = !value;
+    if (value) pUnlock.focus();
+    else { pLock.focus(); wakeControls(); }
+  }
+  function setAspect(value) {
+    preferences.aspect = value;
+    video.style.objectFit = value;
+    savePreferences();
+  }
+  function setSubtitleSize(value) {
+    preferences.subtitleSize = value;
+    video.style.setProperty('--subtitle-size', (value * 0.24) + 'px');
+    savePreferences();
+  }
+  function applySubtitleDelay(track, offset) {
+    if (!track || !track.cues) return;
+    // The endpoint already subtracts the integer offset. Correct its fractional
+    // remainder here, using immutable originals so adjustments never accumulate.
+    const correction = subtitleDelay - (offset - Math.floor(offset));
+    for (const cue of Array.from(track.cues)) {
+      if (!cueTimes.has(cue)) cueTimes.set(cue, { start: cue.startTime, end: cue.endTime });
+      const original = cueTimes.get(cue);
+      cue.endTime = Math.max(0.001, original.end + correction);
+      cue.startTime = Math.max(0, Math.min(cue.endTime - 0.001, original.start + correction));
+    }
+  }
 
   const HIDE_AFTER = 2800;
 
@@ -132,6 +207,7 @@
   /* ---------- open / close ---------- */
 
   function open(entry, list, index) {
+    saveResume();
     teardownMedia(false);
 
     current = entry;
@@ -165,7 +241,10 @@
     previewImg.style.backgroundImage = '';
 
     syncPlayBtn(false); // honest until the 'play' event confirms playback
-    video.playbackRate = 1;
+    video.playbackRate = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].includes(preferences.speed) ? preferences.speed : 1;
+    video.defaultPlaybackRate = video.playbackRate;
+    subtitleDelay = 0;
+    if (locked) setLocked(false);
     subtitleMenuValue = 'off';
 
     if (layer.hidden) lastFocus = document.activeElement;
@@ -179,10 +258,14 @@
     wakeControls();
 
     spinner.classList.add('on');
-    prepareAndAttach(0, false);
+    const resume = resumePosition(entry.rel);
+    prepareAndAttach(resume, false);
+    if (resume) notice('Resuming at ' + fmt(resume) + '. Seek to the start to restart.', 3200);
   }
 
   function close() {
+    saveResume();
+    if (locked) setLocked(false);
     teardownMedia(false);
     layer.hidden = true;
     for (const id of ['topbar', 'main', 'emptyState']) document.getElementById(id).inert = false;
@@ -696,6 +779,8 @@
   }
   function paintVolume() {
     pVolBtn.innerHTML = volIcon();
+    pVolBtn.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
+    pVolBtn.setAttribute('aria-pressed', String(video.muted));
     pVol.value = String(Math.round(video.volume * 100));
   }
   function nudgeVolume(d) {
@@ -731,7 +816,7 @@
     try {
       if (document.pictureInPictureElement) await document.exitPictureInPicture();
       else await video.requestPictureInPicture();
-    } catch (_) { /* ignore */ }
+    } catch (_) { notice('Picture in picture is unavailable. Try again after playback starts.', 3000); }
   }
 
   function setupNextButton() {
@@ -812,7 +897,8 @@
     t.kind = 'subtitles';
     t.label = 'Subtitles';
     t.default = true;
-    const off = (session && session.mode === 'hls' && session.startOffset > 0) ? Math.floor(session.startOffset) : 0;
+    const offset = session && session.mode === 'hls' ? session.startOffset || 0 : 0;
+    const off = Math.floor(offset);
     const offParam = off > 0 ? ('&offset=' + off) : '';
     if (val.startsWith('idx:')) {
       t.src = '/api/subtitle?path=' + enc(current.rel) + '&idx=' + enc(val.slice(4)) + offParam;
@@ -824,6 +910,7 @@
     t.addEventListener('error', () => {
       notice('Subtitles unavailable for this stream (bitmap or conversion failed).', 2600);
     });
+    t.addEventListener('load', () => applySubtitleDelay(t.track, offset));
     video.appendChild(t);
   }
 
@@ -954,10 +1041,20 @@
     for (const v of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]) {
       pMenu.appendChild(menuItem(v + '×', Math.abs(video.playbackRate - v) < 0.01, () => {
         video.playbackRate = v;
+        video.defaultPlaybackRate = v;
+        preferences.speed = v;
+        savePreferences();
         closeMenu(true);
       }));
     }
 
+    pMenu.appendChild(menuSep());
+    pMenu.appendChild(menuLabel('Video size'));
+    for (const [value, label] of [['contain', 'Fit'], ['cover', 'Fill (crop edges)'], ['none', 'Original size']]) {
+      pMenu.appendChild(menuItem(label, (preferences.aspect || 'contain') === value, () => {
+        setAspect(value); closeMenu(true);
+      }));
+    }
     pMenu.appendChild(menuSep());
     pMenu.appendChild(menuLabel('Quality'));
     if (session && session.mode === 'hls') {
@@ -1012,6 +1109,27 @@
     if (hasBitmapSubs()) {
       pMenu.appendChild(menuInfo('Image-based subtitles in this file need a full player app.'));
     }
+    pMenu.appendChild(menuSep());
+    pMenu.appendChild(menuLabel('Subtitle size'));
+    for (const size of [75, 100, 125, 150]) {
+      pMenu.appendChild(menuItem(size + '%', (preferences.subtitleSize || 100) === size, () => {
+        setSubtitleSize(size); closeMenu(true);
+      }));
+    }
+    pMenu.appendChild(menuSep());
+    pMenu.appendChild(menuLabel('Subtitle delay · ' + subtitleDelay.toFixed(1) + ' s'));
+    for (const [label, delta] of [['Earlier by 0.5 s', -0.5], ['Later by 0.5 s', 0.5], ['Reset delay', 0]]) {
+      const item = menuItem(label, false, () => {
+        subtitleDelay = delta ? Math.max(-30, Math.min(30, subtitleDelay + delta)) : 0;
+        const offset = session && session.mode === 'hls' ? session.startOffset || 0 : 0;
+        for (const element of Array.from(video.querySelectorAll('track'))) applySubtitleDelay(element.track, offset);
+        closeMenu(true);
+        notice('Subtitle delay: ' + subtitleDelay.toFixed(1) + ' s', 1800);
+      });
+      item.setAttribute('role', 'menuitem');
+      item.removeAttribute('aria-checked');
+      pMenu.appendChild(item);
+    }
 
     openMenu(pCC);
   }
@@ -1035,6 +1153,16 @@
   /* ---------- button wiring ---------- */
 
   pPlay.addEventListener('click', togglePlay);
+  pLock.addEventListener('click', () => setLocked(true));
+  pUnlock.addEventListener('click', () => setLocked(false));
+  video.addEventListener('volumechange', () => { paintVolume(); savePreferences(); });
+  video.addEventListener('ratechange', () => { preferences.speed = video.playbackRate; savePreferences(); });
+  video.addEventListener('timeupdate', () => {
+    if (Date.now() - lastResumeSave > 5000) { saveResume(); lastResumeSave = Date.now(); }
+  });
+  video.addEventListener('pause', saveResume);
+  window.addEventListener('pagehide', saveResume);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) saveResume(); });
   pRew.addEventListener('click', () => seekBy(-10));
   pFwd.addEventListener('click', () => seekBy(10));
   pBack.addEventListener('click', close);
@@ -1102,6 +1230,7 @@
     );
   });
   video.addEventListener('ended', () => {
+    saveResume();
     syncPlayBtn(false);
     wakeControls();
   });
@@ -1117,6 +1246,12 @@
   pCC.innerHTML = I.cc;
   pGear.innerHTML = I.gear;
   pFs.innerHTML = I.expand;
+  if (typeof preferences.volume === 'number' && Number.isFinite(preferences.volume)) video.volume = Math.max(0, Math.min(1, preferences.volume));
+  video.muted = preferences.muted === true;
+  video.playbackRate = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].includes(preferences.speed) ? preferences.speed : 1;
+  video.defaultPlaybackRate = video.playbackRate;
+  setAspect(['contain', 'cover', 'none'].includes(preferences.aspect) ? preferences.aspect : 'contain');
+  setSubtitleSize([75, 100, 125, 150].includes(preferences.subtitleSize) ? preferences.subtitleSize : 100);
   paintVolume();
 
   document.addEventListener('fullscreenchange', () => {
@@ -1128,9 +1263,32 @@
 
   /* ---------- tap / click surface (Hotstar-style) ---------- */
 
-  const INTERACTIVE = '#pControls, #pTop, #pMenu, #pCenterMsg';
+  const INTERACTIVE = '#pControls, #pTop, #pMenu, #pCenterMsg, #pUnlock, button, input, a';
+
+  shell.addEventListener('pointerdown', (ev) => {
+    if (locked || ev.pointerType !== 'touch' || !ev.isPrimary || ev.target.closest(INTERACTIVE)) return;
+    gesture = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, time: currentVirtualTime(), target: null };
+  });
+  shell.addEventListener('pointermove', (ev) => {
+    if (!gesture || gesture.id !== ev.pointerId) return;
+    const dx = ev.clientX - gesture.x, dy = ev.clientY - gesture.y;
+    if (gesture.target === null && Math.abs(dy) > 20 && Math.abs(dy) > Math.abs(dx)) { gesture = null; return; }
+    if (Math.abs(dx) < 24 && gesture.target === null) return;
+    const duration = effectiveDuration();
+    if (!Number.isFinite(duration)) return;
+    if (gesture.target === null && shell.setPointerCapture) shell.setPointerCapture(ev.pointerId);
+    gesture.target = Math.max(0, Math.min(duration, gesture.time + dx / shell.getBoundingClientRect().width * Math.min(duration, 120)));
+    notice('Seek to ' + fmt(gesture.target), 1000);
+  });
+  shell.addEventListener('pointercancel', () => { gesture = null; });
 
   shell.addEventListener('pointerup', (ev) => {
+    if (locked) return;
+    if (gesture && gesture.id === ev.pointerId) {
+      const target = gesture.target;
+      gesture = null;
+      if (target !== null) { lastTouchTap = 0; lastTouchTime = Date.now(); seekTo(target); wakeControls(); return; }
+    }
     if (ev.target.closest(INTERACTIVE)) return;
     if (Date.now() - lastMenuCloseAt < 250) return; // this click just closed a menu
     if (ev.pointerType === 'mouse') {
@@ -1162,6 +1320,7 @@
   }
 
   shell.addEventListener('dblclick', (ev) => {
+    if (locked) return;
     if (ev.target.closest(INTERACTIVE)) return;
     if (Date.now() - lastTouchTime < 700) return; // touch double-tap already handled
     const rect = shell.getBoundingClientRect();
@@ -1220,12 +1379,28 @@
 
   /* ---------- keyboard ---------- */
 
+  function moveControlFocus(ev, step) {
+    ev.preventDefault(); ev.stopPropagation();
+    const items = Array.from(shell.querySelectorAll('button, input, [tabindex="0"]'))
+      .filter(el => !el.disabled && !el.closest('[hidden], [inert]') && el.getClientRects().length);
+    const index = items.indexOf(document.activeElement);
+    const next = items[(index + step + items.length) % items.length];
+    if (next) next.focus();
+  }
+
   function onKey(ev) {
     if (!isOpen()) return;
+    if (ev.altKey || ev.ctrlKey || ev.metaKey) return;
+    if (ev.key === 'Home' || ev.key === 'End' || ev.key === 'BrowserHome') return;
+    if (locked) {
+      if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); setLocked(false); }
+      else if (ev.key !== 'Enter' && ev.key !== ' ') { ev.preventDefault(); pUnlock.focus(); }
+      return;
+    }
     wakeControls();
     if (ev.key === 'Tab') {
       const items = Array.from(layer.querySelectorAll('button, a[href], input, [tabindex="0"]'))
-        .filter((el) => !el.disabled && el.getClientRects().length && !el.closest('[hidden]'));
+        .filter((el) => !el.disabled && el.getClientRects().length && !el.closest('[hidden], [inert]'));
       const first = items[0], last = items[items.length - 1];
       if (ev.shiftKey && (document.activeElement === first || document.activeElement === shell)) {
         ev.preventDefault(); if (last) last.focus();
@@ -1242,6 +1417,10 @@
       return;
     }
     const tag = ev.target && ev.target.tagName;
+    if ((ev.target === pVol || ev.target === pBar) && (ev.key === 'ArrowUp' || ev.key === 'ArrowDown')) {
+      moveControlFocus(ev, ev.key === 'ArrowUp' ? -1 : 1);
+      return;
+    }
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 
     const k = ev.key;
@@ -1249,8 +1428,24 @@
       if (k === 'Escape') { ev.preventDefault(); ev.stopPropagation(); closeMenu(true); }
       return; // arrow keys are handled by the menu itself
     }
+    if (ev.target === shell && (k === 'ArrowDown' || k === 'ArrowUp')) {
+      ev.preventDefault(); ev.stopPropagation();
+      (k === 'ArrowDown' ? pPlay : pBack).focus();
+      return;
+    }
+    // D-pad navigates actual controls when focused; arrows on the video retain
+    // seek/volume shortcuts. Home/End are deliberately left to the browser/TV.
+    if (tag === 'BUTTON' && /^Arrow/.test(k)) {
+      const step = k === 'ArrowLeft' || k === 'ArrowUp' ? -1 : 1;
+      moveControlFocus(ev, step);
+      return;
+    }
     if (k === ' ' && tag === 'BUTTON') return;
-    if (k === ' ') { ev.preventDefault(); ev.stopPropagation(); togglePlay(); showTapGlyph(video.paused ? 'play' : 'pause'); }
+    if (k === ' ' || k === 'MediaPlayPause' || k === 'k' || (k === 'Enter' && ev.target === shell)) { ev.preventDefault(); ev.stopPropagation(); togglePlay(); showTapGlyph(video.paused ? 'play' : 'pause'); }
+    else if (k === 'MediaPlay') { ev.preventDefault(); tryPlay(); }
+    else if (k === 'MediaPause') { ev.preventDefault(); video.pause(); }
+    else if (k === 'MediaRewind') { ev.preventDefault(); seekBy(-10); }
+    else if (k === 'MediaFastForward') { ev.preventDefault(); seekBy(10); }
     else if (k === 'ArrowLeft') { ev.preventDefault(); ev.stopPropagation(); seekBy(-10); }
     else if (k === 'ArrowRight') { ev.preventDefault(); ev.stopPropagation(); seekBy(10); }
     else if (k === 'ArrowUp') { ev.preventDefault(); ev.stopPropagation(); nudgeVolume(0.05); }

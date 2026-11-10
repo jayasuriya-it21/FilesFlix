@@ -888,8 +888,27 @@ svg { display: block; }
 }
 #playerLayer.fade { opacity: 0; transition: opacity var(--dur-1) ease; }
 
-#playerShell { position: absolute; inset: 0; }
+#playerShell { position: absolute; inset: 0; touch-action: pan-y; }
 #playerShell.idle { cursor: none; }
+#playerShell.locked { cursor: default; }
+#playerShell.locked #pTop, #playerShell.locked #pControls { visibility: hidden; pointer-events: none; }
+#video::cue { font-size: var(--subtitle-size, 24px); }
+.pUnlock {
+  position: absolute;
+  z-index: 12;
+  top: max(20px, env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #11151f;
+  color: var(--text-hi);
+  font: inherit;
+  cursor: pointer;
+}
+.pUnlock:hover { background: #263044; }
+#playerLayer :is(button, input, [tabindex]):focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
 #video {
   position: absolute;
@@ -1223,6 +1242,7 @@ svg { display: block; }
   position: absolute;
   z-index: 9;
   min-width: 230px;
+  max-width: calc(100% - 24px);
   max-height: min(400px, 60vh);
   overflow-y: auto;
   padding: 6px;

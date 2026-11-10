@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0d16">
 <title>FileFlix</title>
-<link rel="stylesheet" href="/css/style.css?v=9">
+<link rel="stylesheet" href="/css/style.css?v=10">
 </head>
 <body>
 <a class="skipLink" href="#main">Skip to library</a>
@@ -109,6 +109,7 @@
         <div id="pTitle"></div>
         <span id="pBadge" hidden></span>
       </div>
+      <button id="pLock" class="pBtn" aria-label="Lock player controls" title="Lock player controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg></button>
     </header>
 
     <div id="pOptimizing" role="status" hidden>Optimizing playback…</div>
@@ -156,11 +157,12 @@
     </div>
 
     <div id="pMenu" role="menu" hidden></div>
+    <button id="pUnlock" class="pUnlock" hidden>Unlock controls</button>
   </div>
 </div>
 
 <noscript><p style="color:#f2f4f8;font-family:system-ui,sans-serif;padding:2rem">FileFlix needs JavaScript to render the library.</p></noscript>
-<script src="/js/player.js?v=9"></script>
+<script src="/js/player.js?v=10"></script>
 <script src="/js/app.js?v=9"></script>
 </body>
 </html>
