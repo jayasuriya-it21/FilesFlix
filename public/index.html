@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0d16">
+<title>FileFlix</title>
+<link rel="stylesheet" href="/css/style.css?v=9">
+</head>
+<body>
+<a class="skipLink" href="#main">Skip to library</a>
+
+<header id="topbar">
+  <a class="brand" href="/" data-nav="home">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.2 6.4v11.2l9.3-5.6z" fill="currentColor"/></svg></span>
+    <span class="brandName">FileFlix</span>
+  </a>
+  <nav id="mainNav" aria-label="Primary">
+    <a href="/" class="navlink active" data-nav="home">Discover</a>
+    <a href="#videos" class="navlink" data-nav="videos">Videos</a>
+    <a href="#photos" class="navlink" data-nav="photos">Photos</a>
+    <a href="#music" class="navlink" data-nav="music">Music</a>
+    <a href="#files" class="navlink" data-nav="files">Files</a>
+  </nav>
+  <div id="searchwrap" role="search">
+    <span class="searchIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16.2 16.2 4.3 4.3"/></svg></span>
+    <input id="search" type="search" placeholder="Search the library" aria-label="Search the library" autocomplete="off" spellcheck="false">
+    <button id="searchClear" aria-label="Clear search" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <a id="hostBtn" href="/host">Manage library</a>
+</header>
+
+<main id="main" tabindex="-1">
+  <!-- Home: OTT mode (hero + rows) -->
+  <div id="homeView" hidden></div>
+
+  <!-- Files: manager mode -->
+  <div id="filesView" hidden>
+    <nav id="crumbs" aria-label="Breadcrumb"></nav>
+    <div id="filesBar">
+      <div id="filters" role="group" aria-label="File type filter">
+        <button class="chip active" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="video" aria-pressed="false">Videos</button>
+        <button class="chip" data-filter="audio" aria-pressed="false">Audio</button>
+        <button class="chip" data-filter="image" aria-pressed="false">Images</button>
+        <button class="chip" data-filter="doc" aria-pressed="false">Docs</button>
+        <button class="chip" data-filter="other" aria-pressed="false">Other</button>
+      </div>
+      <div id="filesTools">
+        <button id="viewToggle" class="iconBtn" aria-label="Switch to list view"></button>
+      </div>
+    </div>
+    <div id="container" class="grid" aria-live="polite"></div>
+  </div>
+</main>
+
+<!-- Empty / error / setup states -->
+<div id="emptyState" hidden>
+  <span id="emptyIcon" aria-hidden="true"></span>
+  <h2 id="emptyTitle"></h2>
+  <p id="emptyText"></p>
+  <div class="emptyActions">
+    <button id="emptyRetry" class="btnGhost" hidden>Try again</button>
+    <a id="emptyHost" class="btnPrimary" href="/host" hidden>Open the Host panel</a>
+  </div>
+</div>
+
+<!-- Detail sheet: OTT title page for a video -->
+<section id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+  <div class="sheetScrim" data-close-sheet></div>
+  <div class="sheetCard">
+    <div class="sheetMedia">
+      <span class="sheetFallback" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></span>
+      <img id="sheetImg" alt="">
+      <button id="sheetClose" class="iconBtn sheetClose" aria-label="Close details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="sheetBody">
+      <h2 id="sheetTitle"></h2>
+      <div id="sheetMeta" class="sheetMeta"></div>
+      <div class="sheetActions">
+        <button id="sheetPlay" class="btnPrimary btnLg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Play</button>
+        <button id="sheetFolder" class="btnGhost btnLg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4.2l2 2.5H19A1.5 1.5 0 0 1 20.5 9v8.5A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg>Open folder</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Image lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+  <img id="lightboxImg" alt="">
+  <button id="lightboxClose" class="iconBtn" aria-label="Close image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div>
+
+<!-- Full-takeover player -->
+<div id="playerLayer" role="dialog" aria-modal="true" aria-label="Player" hidden>
+  <div id="playerShell" tabindex="-1">
+    <video id="video" playsinline preload="auto"></video>
+
+    <div id="pSpinner" aria-hidden="true"><div class="ring"></div></div>
+    <div id="pTapGlyph" aria-hidden="true"></div>
+    <div id="pSkipFlash" aria-hidden="true">
+      <span id="pSkipFlashIcon"></span>
+      <span id="pSkipFlashText"></span>
+    </div>
+
+    <header id="pTop">
+      <button id="pBack" class="pBtn" aria-label="Back to library" title="Back (Esc)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+      <div id="pTitleWrap">
+        <div id="pTitle"></div>
+        <span id="pBadge" hidden></span>
+      </div>
+    </header>
+
+    <div id="pOptimizing" role="status" hidden>Optimizing playback…</div>
+
+    <div id="pCenterMsg" role="status" hidden>
+      <p id="pCenterText"></p>
+      <div class="pCenterActions">
+        <button id="pRetry" class="btnGhost" hidden>Try again</button>
+        <a id="pDownload" class="btnGhost" hidden>Download file</a>
+      </div>
+    </div>
+
+    <div id="pControls">
+      <div id="pScrubWrap">
+        <div id="pPreview" aria-hidden="true">
+          <div id="pPreviewImg"></div>
+          <span id="pPreviewTime"></span>
+        </div>
+        <div id="pBar" role="slider" aria-label="Seek" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <div id="pBarTrack"></div>
+          <div id="pBarBuffered"></div>
+          <div id="pBarFill"></div>
+          <div id="pBarKnob"></div>
+        </div>
+        <div id="pTimeRow">
+          <span id="tCur">0:00</span>
+          <span id="tDur">0:00</span>
+        </div>
+      </div>
+      <div id="pBtnRow">
+        <button class="pBtn" id="pPlay" aria-label="Play" title="Play / pause (Space)"></button>
+        <button class="pBtn" id="pRew" aria-label="Back 10 seconds" title="Back 10 seconds (←)"></button>
+        <button class="pBtn" id="pFwd" aria-label="Forward 10 seconds" title="Forward 10 seconds (→)"></button>
+        <div class="pvol" id="pVolGroup">
+          <button class="pBtn" id="pVolBtn" aria-label="Mute" title="Mute (M)"></button>
+          <input id="pVol" type="range" min="0" max="100" value="100" aria-label="Volume">
+        </div>
+        <span class="pSpacer" aria-hidden="true"></span>
+        <button class="pBtn pOpt" id="pNext" aria-label="Play next video" title="Play next" hidden></button>
+        <button class="pBtn pOpt" id="pPip" aria-label="Picture in picture" title="Picture in picture" hidden></button>
+        <button class="pBtn" id="pCC" aria-label="Subtitles" title="Subtitles (C)" aria-haspopup="menu" aria-expanded="false" hidden></button>
+        <button class="pBtn" id="pGear" aria-label="Settings" title="Playback settings" aria-haspopup="menu" aria-expanded="false"></button>
+        <button class="pBtn" id="pFs" aria-label="Fullscreen" title="Fullscreen (F)"></button>
+      </div>
+    </div>
+
+    <div id="pMenu" role="menu" hidden></div>
+  </div>
+</div>
+
+<noscript><p style="color:#f2f4f8;font-family:system-ui,sans-serif;padding:2rem">FileFlix needs JavaScript to render the library.</p></noscript>
+<script src="/js/player.js?v=9"></script>
+<script src="/js/app.js?v=9"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "fileflix",
+  "version": "1.0.0",
+  "description": "Self-hosted local media streaming platform with a Netflix-style experience. No cloud, no logins for viewers.",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "node": ">=18.15.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FileFlix · Host</title>
+<link rel="stylesheet" href="/css/style.css?v=4">
+<style>
+  .host-wrap { max-width: 660px; margin: 30px auto; padding: 0 16px 60px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; }
+  .panel h2 { margin: 0 0 14px; font-size: 17px; }
+  .panel input[type=password], .panel input[type=text] {
+    width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); margin-bottom: 10px; outline: none;
+  }
+  .primary {
+    padding: 9px 18px; border-radius: 8px; border: none;
+    background: var(--accent); color: var(--accent-ink);
+  }
+  .secondary {
+    padding: 9px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); margin-left: 8px;
+  }
+  .msg { color: var(--muted); font-size: 13px; min-height: 18px; margin: 6px 0; }
+  .msg.err { color: #ff7a7a; }
+  table.stat { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.stat td { padding: 5px 0; color: var(--muted); }
+  table.stat td.v { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+  .logbox { max-height: 300px; overflow: auto; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+  .logbox b { color: var(--text); font-weight: 600; }
+  .danger { color: #ff7a7a; }
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <a class="brand" href="/"><span class="logo">▶</span>FileFlix</a>
+  <div style="flex:1"></div>
+  <span id="whoami" class="msg"></span>
+  <button id="logoutBtn" class="secondary" hidden>Log out</button>
+</header>
+
+<div class="host-wrap">
+
+  <!-- Not logged in -->
+  <div id="gate" class="panel">
+    <h2 id="gateTitle">Host login</h2>
+    <p class="msg" id="gateNote">The host password protects library settings and system status only — the client library at <a href="/">/</a> stays public on your LAN by design.</p>
+    <input id="pw" type="password" placeholder="Password (min 4 characters)" autocomplete="current-password">
+    <div class="msg err" id="gateErr"></div>
+    <button id="gateBtn" class="primary">Log in</button>
+  </div>
+
+  <!-- Library -->
+  <section id="panelLibrary" class="panel" hidden>
+    <h2>Media library</h2>
+    <p class="msg">Folder from which every client browses and streams. One directory; pick a top-level media folder on this machine.</p>
+    <input id="mediaDir" type="text" list="rootSuggestions" placeholder="D:\Media  ·  /home/name/Videos" autocomplete="off" spellcheck="false">
+    <datalist id="rootSuggestions"></datalist>
+    <div class="msg" id="libMsg"></div>
+    <button id="saveDir" class="primary">Save media directory</button>
+  </section>
+
+  <!-- System -->
+  <section id="panelSystem" class="panel" hidden>
+    <h2>System status</h2>
+    <table class="stat">
+      <tr><td>CPU</td><td class="v" id="stCpu">–</td></tr>
+      <tr><td>Memory</td><td class="v" id="stMem">–</td></tr>
+      <tr><td>Disk</td><td class="v" id="stDisk">–</td></tr>
+      <tr><td>Uptime</td><td class="v" id="stUpt">–</td></tr>
+      <tr><td>Node</td><td class="v" id="stNode">–</td></tr>
+      <tr><td>FFmpeg</td><td class="v" id="stFfmpeg">–</td></tr>
+      <tr><td>LAN URL</td><td class="v" id="stLan">–</td></tr>
+    </table>
+    <p class="msg" id="ffmpegHint"></p>
+  </section>
+
+  <!-- Activity -->
+  <section id="panelLogs" class="panel" hidden>
+    <h2>Activity log</h2>
+    <div class="logbox" id="logList"></div>
+  </section>
+
+</div>
+
+<script src="/js/host.js"></script>
+</body>
+</html>

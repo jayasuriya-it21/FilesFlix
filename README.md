@@ -1,205 +1,128 @@
-# FilesFlix - Personal Media Streaming Platform
+# FileFlix
 
-FilesFlix is a modern, Netflix-inspired personal media streaming server built with Flask. It automatically discovers your media files and provides a beautiful web interface for streaming videos, viewing images, and managing your media collection.
+Self-hosted, local-network media streaming with a Netflix-style experience. Point it at a
+folder on your PC and any device on the same network — phone, tablet, laptop, smart TV
+browser — can browse and stream it. No cloud, no accounts for viewers, no telemetry.
 
-## ✨ Features
-
-### 🎬 Media Streaming
-- **Adaptive Video Streaming**: Automatic HLS (HTTP Live Streaming) with multiple quality options
-- **Direct Streaming**: Fast MP4 streaming for compatible files
-- **Video.js Player**: Modern OTT-style player with Netflix-like controls
-- **Thumbnail Generation**: Automatic video thumbnails and preview images
-- **Multi-format Support**: MP4, AVI, MKV, MOV, WMV, and more
-
-### 🖼️ Media Management
-- **Smart Discovery**: Automatic scanning of media directories
-- **Real-time Updates**: File system monitoring with live updates
-- **Advanced Filtering**: Filter by media type (videos, images, documents)
-- **Search Functionality**: Quick search across your media collection
-- **Download Support**: Direct file downloads
-
-### 🛡️ Security & Authentication
-- **Flask-Login Authentication**: Secure session-based login system
-- **Protected Admin Area**: Host dashboard with system monitoring
-- **CSRF Protection**: Built-in security features
-
-### � System Monitoring
-- **Real-time Stats**: CPU, memory, and disk usage monitoring
-- **Media Analytics**: File count and size statistics
-- **Directory Management**: Browse and manage media directories
-- **Activity Logging**: Comprehensive logging system
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.8 or higher
-- FFmpeg (for video processing)
-
-### Installation
-
-1. **Clone and navigate to the project**:
-   ```bash
-   cd FilesFlix
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure FFmpeg** (if not in PATH):
-   ```python
-   # Edit config.py
-   FFMPEG_PATH = r"C:\path\to\ffmpeg.exe"
-   FFPROBE_PATH = r"C:\path\to\ffprobe.exe"
-   ```
-
-4. **Run the server**:
-   ```bash
-   python app.py
-   ```
-
-5. **Access the application**:
-   - **Client Interface**: http://localhost:5000
-   - **Host Dashboard**: http://localhost:5000/host
-
-### Default Credentials
-- **Username**: `admin`
-- **Password**: `password123`
-
-## 🔧 Configuration
-
-### Media Directory
-By default, FilesFlix serves media from its own directory. To change this:
-
-1. Use the host dashboard at `/host`
-2. Enter your media directory path
-3. Click "Update Directory" to scan for new media
-
-### Supported File Types
-
-**Videos**: mp4, avi, mkv, mov, wmv, flv, webm, m4v  
-**Images**: jpg, jpeg, png, gif, bmp, webp, svg  
-**Documents**: pdf, txt, doc, docx, ppt, pptx, xls, xlsx  
-
-## 🎯 API Endpoints
-
-### Public Endpoints
-- `GET /` - Client interface
-- `GET /client` - Media browser
-- `GET /stream/<path>` - Direct video streaming
-- `GET /hls/<path>` - HLS streaming
-- `GET /file/<path>` - File access
-- `GET /thumbnail/<path>` - Video thumbnails
-
-### Protected Endpoints (Require Authentication)
-- `GET /host` - Host dashboard
-- `GET /api/system` - System statistics
-- `POST /api/directory` - Update media directory
-- `GET /api/scan` - Trigger media scan
-
-### Authentication
-- `GET /login` - Login page
-- `POST /login` - Authenticate user
-- `GET /logout` - Logout user
-
-## 🏗️ Architecture
-
-### Backend Components
-- **Flask**: Web framework with session management
-- **Flask-Login**: Authentication system
-- **Watchdog**: File system monitoring
-- **FFmpeg**: Video processing and thumbnail generation
-- **psutil**: System monitoring
-
-### Frontend Features
-- **Responsive Design**: Mobile-friendly interface
-- **Modern UI**: Netflix-inspired dark theme
-- **Progressive Loading**: Lazy loading for better performance
-- **Video.js Integration**: Professional video player
-
-### File Structure
 ```
-FilesFlix/
-├── app.py              # Main Flask application
-├── config.py           # Configuration settings
-├── utils.py            # Utility functions
-├── requirements.txt    # Python dependencies
-├── templates/          # HTML templates
-│   ├── client.html     # Media browser interface
-│   ├── host.html       # Admin dashboard
-│   └── login.html      # Authentication page
-├── static/             # Static assets
-│   ├── css/           # Stylesheets
-│   └── images/        # Images and fallbacks
-└── logs/              # Application logs
+Client (public)                      Host (password-protected)
+┌──────────────────────────┐         ┌──────────────────────────────┐
+│ browse / search / filter │         │ pick media directory         │
+│ thumbnails, breadcrumbs  │  HTTP   │ CPU · RAM · disk · FFmpeg    │
+│ OTT video/audio player   │◀───────▶│ activity log · settings      │
+└──────────────────────────┘         └──────────────────────────────┘
 ```
 
-## � Security Features
+## Quick start
 
-- **Session-based Authentication**: Secure login system
-- **CSRF Protection**: Prevents cross-site request forgery
-- **Input Validation**: Sanitized file paths and user inputs
-- **Secure Headers**: HTTP security headers
-- **Admin-only Access**: Protected host dashboard
+Requires Node.js **18.15+** (no other runtime deps beyond Express).
 
-## 📱 Browser Compatibility
+```bash
+npm install
+npm start
+```
 
-- **Chrome/Edge**: Full support including HLS
-- **Firefox**: Full support with Video.js
-- **Safari**: Native HLS support
-- **Mobile**: Responsive design for iOS/Android
+The console prints every LAN URL, for example `http://192.168.1.50:7010`.
 
-## 🛠️ Troubleshooting
+1. Open **`/host`** on the host machine → create the host password (first run).
+2. Point it at your media folder (e.g. `D:\Media` or `/home/you/Videos`).
+3. Share any printed URL with devices on the same Wi-Fi/LAN. Done.
 
-### Video Playback Issues
-1. Ensure FFmpeg is installed and accessible
-2. Check video format compatibility
-3. Verify file permissions
+Data lives in `data/`: `config.json` (port, media dir, host password hash),
+`log.jsonl` (activity log) and `cache/` (thumbnails, metadata), all git-ignored —
+nothing sensitive is committed.
 
-### Authentication Problems
-1. Clear browser cookies/session data
-2. Check default credentials (admin/password123)
-3. Restart the server
+## What works — and what honestly doesn't (yet)
 
-### Performance Optimization
-1. Use SSD storage for media files
-2. Enable hardware acceleration in FFmpeg
-3. Adjust streaming quality in config.py
+| Feature | Status |
+|---|---|
+| HTTP Range streaming (video/audio), images, docs, downloads | ✅ |
+| MKV/AVI/TS remux and unsupported-codec video transcoding to HLS | ✅ with FFmpeg; requires a compatible browser |
+| Grid + list view, breadcrumbs, real-time search, type filters | ✅ |
+| OTT player: ±10 s skip, speed, volume/mute, fullscreen | ✅ |
+| Seek-preview thumbnails on hover (sprite sheets, cached) | ✅ with FFmpeg |
+| **Multiple subtitles** (extracted from MKV/etc. to WebVTT, cached) | ✅ with FFmpeg |
+| External sibling `.srt`/`.vtt` subtitles | ✅ no FFmpeg needed |
+| **Multiple audio tracks** | ⚠️ browser-dependent¹ |
+| Video thumbnails (lazy, background single-worker queue) | ✅ with FFmpeg |
+| Play/download, subtitle & login activity logging | ✅ |
+| Host panel: CPU/RAM/disk/uptime/FFmpeg status, log tail | ✅ |
 
-## 📋 System Requirements
+**¹ Audio tracks honesty:** browsers only expose `HTMLMediaElement.audioTracks`
+where supported (Safari does; Chromium generally does not). FileFlix detects this
+and shows the menu only when switching can actually work. Where it can't, the
+panel says so — no fake capability is advertised.
 
-### Minimum Requirements
-- **CPU**: 2 cores, 2.0 GHz
-- **RAM**: 2 GB
-- **Storage**: 1 GB free space
-- **Network**: 10 Mbps for local streaming
+**HLS audio:** the compatibility pipeline currently selects the first audio
+stream. Alternate-language audio switching is not yet implemented for HLS.
+Supported browser codecs stream directly; compatible MKVs are repackaged without
+re-encoding. Other videos are converted to H.264/AAC. This covers common local
+video formats, not DRM-protected, corrupt, or every possible media file.
 
-### Recommended Requirements
-- **CPU**: 4+ cores, 3.0 GHz
-- **RAM**: 4+ GB
-- **Storage**: SSD with 10+ GB free space
-- **Network**: 100 Mbps for multiple users
+**Without FFmpeg:** browsing and browser-compatible playback still work, but
+HLS conversion, video thumbnails, seek-previews, embedded-subtitle extraction
+and audio-track metadata are unavailable. The host
+panel shows exactly how to install it (`winget install Gyan.FFmpeg`,
+`sudo apt install ffmpeg`) or set `FFMPEG_PATH`/`FFPROBE_PATH`; it is detected
+automatically, without a restart.
 
-## 🤝 Contributing
+## Security & privacy posture
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+- **Client is public on the LAN by design** — that's the product. Only the host
+  panel asks for a password (scrypt-hashed, HttpOnly SameSite cookie, per-IP
+  login rate limit).
+- **Path containment**: every file API addresses a *relative* path under the
+  media root; absolute paths, `..`, and symlink escapes are refused.
+- **No telemetry, no analytics, no third-party requests.** Activity logging is
+  local-only (`data/log.jsonl`), viewable in the host panel.
+- Video stream requests carry `Content-Disposition: inline` only for the media
+  root; downloads are explicit.
 
-## 📄 License
+## Performance notes
 
-This project is open source and available under the MIT License.
+- Streams are never fully buffered: `fs.createReadStream` range slices go
+  straight to the socket; client-side `<video>` buffering does the rest.
+- Thumbnail generation: 1 worker, 200 ms gap between jobs, capped queue,
+  content-addressed cache (`path+mtime+size`), boot-time eviction caps.
+- CPU% is sampled on demand — no background polling.
+- HLS transcoding uses CPU and disk while encoding; high-resolution HEVC may
+  not convert in real time on slower hosts. Seeking is limited to generated
+  segments until conversion completes. Completed sessions are reused; idle
+  encoders stop after two minutes. Session-count limits are not a disk-byte quota.
+- Zero frameworks, zero blur/shader effects; animations are transform-only.
 
-## 🆘 Support
+## API (all under `/api`)
 
-For issues and questions:
-1. Check the troubleshooting section
-2. Review the logs in `/logs/fileflix.log`
-3. Open an issue on the repository
+| Route | Auth | Purpose |
+|---|---|---|
+| `GET /config` | — | whether a library exists |
+| `GET /browse?dir=rel` | — | listing + breadcrumbs (+ queues thumbs) |
+| `GET /search?q=` | — | bounded recursive search |
+| `GET /stream?path=rel` | — | Range-request streaming (videos/audio/images/docs) |
+| `GET /hls/prepare?path=rel` | — | choose native playback or create/reuse an HLS session |
+| `GET /hls/:key/master.m3u8` | — | growing or completed HLS playlist |
+| `GET /hls/:key/seg/:name` | — | initialization and media fragments |
+| `GET /download?path=rel` | — | attachment download |
+| `GET /thumb?path=rel` | — | cached video thumbnail (404 until ready) |
+| `GET /meta?path=rel` | — | duration, audio/subtitle streams (ffprobe) |
+| `GET /sprite?path=rel` | — | seek-preview sprite sheet info |
+| `GET /subtitle?path=rel&idx=n` / `?srt=rel` | — | WebVTT subtitles |
+| `GET /host/session` | — | session state (for the gate UI) |
+| `POST /host/setup`, `/host/login`, `/host/logout` | — | password setup & sessions |
+| `GET/PATCH /host/panel`, `/host/settings`, `/host/system`, `/host/roots`, `/host/logs` | host | admin panel |
 
----
+## Project layout
 
-**FilesFlix** - Transform your media collection into a professional streaming experience! �✨
+```
+server/            Express app, config, activity log, auth, system stats
+  routes/          browse · stream · host APIs
+  media/           FFmpeg detection, thumbs queue, ffprobe/sprite/subs, cache pruning
+public/            client explorer + OTT player + host panel (plain HTML/CSS/JS)
+data/              runtime state: config.json, log.jsonl, cache/ (git-ignored)
+```
+
+## Roadmap ideas
+
+- Hardware-accelerated HLS transcoding for codecs browsers can't play
+- TV-style "Continue watching" rows (local-only, still no accounts)
+- Playlist/shuffle for audio
