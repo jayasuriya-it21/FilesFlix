@@ -513,17 +513,28 @@ private fun FileFlixEntryRow(
                     else -> entry.cat
                 }
                 val sizeText = if (entry.size > 0) Utils.formatFileSize(entry.size) else ""
-                val formatText = entry.sourceFormats.joinToString(" • ")
-                val details = listOf(
-                    catText,
-                    sizeText,
-                    formatText,
-                ).filter { it.isNotBlank() }
-                Text(
-                    text = details.joinToString(" • "),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(
+                        text = listOf(
+                            catText,
+                            sizeText,
+                        )
+                            .filter { it.isNotBlank() }
+                            .joinToString(" • "),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    if (entry.sourceFormats.isNotEmpty()) {
+                        Row(
+                            modifier = Modifier.horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        ) {
+                            entry.sourceFormats.forEach { format ->
+                                SourceFormatBadge(format = format)
+                            }
+                        }
+                    }
+                }
             }
         },
         trailingContent = {
@@ -544,4 +555,24 @@ private fun FileFlixEntryRow(
             }
         },
     )
+}
+
+@Composable
+private fun SourceFormatBadge(format: String) {
+    Surface(
+        shape = RoundedCornerShape(4.dp),
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+    ) {
+        Text(
+            text = format,
+            modifier = Modifier.padding(
+                horizontal = 6.dp,
+                vertical = 2.dp,
+            ),
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+        )
+    }
 }

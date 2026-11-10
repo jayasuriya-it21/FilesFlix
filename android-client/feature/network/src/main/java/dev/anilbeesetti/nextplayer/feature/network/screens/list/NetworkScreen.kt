@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -138,6 +139,11 @@ internal fun NetworkScreenContent(state: NetworkUiState, onAction: (NetworkActio
                     )
                 }
                 item {
+                    SmbSourceCard(
+                        onAddSmb = { onAction(NetworkAction.AddConnection) },
+                    )
+                }
+                item {
                     NetworkStreamCard(
                         url = streamUrl,
                         onUrlChange = { streamUrl = it },
@@ -195,6 +201,51 @@ internal fun NetworkScreenContent(state: NetworkUiState, onAction: (NetworkActio
                 }
             },
         )
+    }
+}
+
+@Composable
+private fun SmbSourceCard(modifier: Modifier = Modifier, onAddSmb: () -> Unit) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp))
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(MaterialTheme.colorScheme.secondaryContainer),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = NextIcons.Storage,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+            )
+        }
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = stringResource(R.string.smb_source_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = stringResource(R.string.smb_source_desc),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        OutlinedButton(
+            onClick = onAddSmb,
+            modifier = Modifier.tvFocusRing(),
+        ) {
+            Text(text = stringResource(R.string.smb_source_add))
+        }
     }
 }
 

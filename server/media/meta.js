@@ -65,12 +65,35 @@ function isDolbyVision(s) {
   return false;
 }
 
+function isHdr10Plus(s) {
+  if (!s || !Array.isArray(s.side_data_list)) return false;
+  return s.side_data_list.some((sd) => {
+    const type = String(sd.side_data_type || '').toLowerCase();
+    return type.includes('hdr10+') ||
+      type.includes('smpte2094-40') ||
+      type.includes('dynamic hdr plus');
+  });
+}
+
+function isHdr10(s) {
+  if (!s) return false;
+  const transfer = String(s.color_transfer || '').toLowerCase();
+  const primaries = String(s.color_primaries || '').toLowerCase();
+  return transfer === 'smpte2084' && (primaries === 'bt2020' || primaries === 'bt2020nc');
+}
+
 function extractSourceFormats(meta) {
   if (!meta) return [];
   const formats = [];
 
-  if (meta.video && meta.video.dolbyVision) {
-    formats.push('Dolby Vision');
+  if (meta.video) {
+    if (meta.video.dolbyVision) {
+      formats.push('Dolby Vision');
+    } else if (meta.video.hdr10Plus) {
+      formats.push('HDR10+');
+    } else if (meta.video.hdr10) {
+      formats.push('HDR10');
+    }
   }
 
   if (Array.isArray(meta.audioStreams)) {
@@ -135,6 +158,8 @@ function normalizeMeta(meta) {
     if (typeof meta.video.dolbyVision !== 'boolean') {
       meta.video.dolbyVision = Boolean(meta.video.dolbyVision);
     }
+    meta.video.hdr10Plus = Boolean(meta.video.hdr10Plus);
+    meta.video.hdr10 = Boolean(meta.video.hdr10);
   }
   if (Array.isArray(meta.audioStreams)) {
     for (let i = 0; i < meta.audioStreams.length; i++) {
@@ -158,7 +183,7 @@ async function getCachedMeta(absPath, mtimeMs, size) {
   if (memoryMetaCache.has(memKey)) {
     return memoryMetaCache.get(memKey);
   }
-  const cacheFile = cacheKey('meta2', absPath, mtimeMs, size) + '.json';
+  const cacheFile = cacheKey('meta3', absPath, mtimeMs, size) + '.json';
   try {
     const raw = await fsp.readFile(cacheFile, 'utf8');
     const parsed = normalizeMeta(JSON.parse(raw));
@@ -185,7 +210,7 @@ async function metaFor(absPath, mtimeMs, size) {
   if (memoryMetaCache.has(memKey)) {
     return memoryMetaCache.get(memKey);
   }
-  const cacheFile = cacheKey('meta2', absPath, mtimeMs, size) + '.json';
+  const cacheFile = cacheKey('meta3', absPath, mtimeMs, size) + '.json';
   try {
     const raw = await fsp.readFile(cacheFile, 'utf8');
     const parsed = normalizeMeta(JSON.parse(raw));
@@ -240,7 +265,9 @@ async function metaFor(absPath, mtimeMs, size) {
               index: s.index,
               width: s.width || null,
               height: s.height || null,
-              dolbyVision: isDolbyVision(s)
+              dolbyVision: isDolbyVision(s),
+              hdr10Plus: isHdr10Plus(s),
+              hdr10: isHdr10(s)
             };
           }
         }

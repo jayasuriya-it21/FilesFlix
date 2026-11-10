@@ -21,8 +21,8 @@ data class ApplicationPreferences(
     val networkSortOrder: Sort.Order = Sort.Order.ASCENDING,
     val networkMediaLayoutMode: MediaLayoutMode = MediaLayoutMode.LIST,
 
-    // FileFlix server
-    val fileflixServerUrl: String = "",
+    // Files Flex laptop server. Users can replace this from the Network screen.
+    val fileflixServerUrl: String = "http://10.10.2.4:7010",
 
     // Fields
     val showDurationField: Boolean = true,

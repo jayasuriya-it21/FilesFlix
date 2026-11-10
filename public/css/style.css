@@ -1227,6 +1227,7 @@ svg { display: block; }
 .pBtn:hover { background: rgba(255, 255, 255, .1); }
 .pBtn:active { background: rgba(255, 255, 255, .16); }
 .pBtn[aria-expanded="true"] { background: rgba(255, 255, 255, .14); color: var(--blue); }
+.pBtn.active { color: var(--blue); background: color-mix(in srgb, var(--blue) 14%, transparent); }
 
 /* volume group */
 .pvol { display: flex; align-items: center; }
@@ -1251,6 +1252,14 @@ svg { display: block; }
   background: rgba(17, 21, 31, .98);
   box-shadow: 0 16px 48px rgba(4, 6, 12, .65);
 }
+#pMenu.queueMode { width: min(380px, calc(100vw - 24px)); max-height: min(520px, 68vh); }
+.pQueueItem { min-height: 58px; padding-block: 8px; }
+.pQueueItem.active { background: rgba(255, 255, 255, .08); color: var(--blue); }
+.pQueueCopy { display: grid; min-width: 0; gap: 2px; }
+.pQueueCopy strong, .pQueueCopy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pQueueCopy strong { font-size: 13.5px; font-weight: 600; color: currentColor; }
+.pQueueCopy small { color: var(--text-faint); font-size: 11.5px; }
+.pQueueItem .pCheck { visibility: visible; }
 .pMenuLabel {
   padding: 10px 14px 4px;
   font-size: 12px;

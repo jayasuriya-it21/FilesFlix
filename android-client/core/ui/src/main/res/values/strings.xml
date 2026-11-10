@@ -15,7 +15,7 @@
     <string name="settings_import_success">Settings imported</string>
     <string name="settings_import_failed">Could not finish importing settings. Please try again.</string>
     <string name="settings_import_invalid">Could not read this file, or it contains no supported JSON settings</string>
-    <string name="app_name" translatable="false">Next Player</string>
+    <string name="app_name" translatable="false">Files Flex</string>
     <string name="about_description">Version, support, credits</string>
     <string name="about_name">About</string>
     <string name="appearance_description">Adjust the app to your liking</string>
@@ -41,10 +41,10 @@
     <string name="navigate_up">Navigate up</string>
     <string name="no_videos_found">No videos found</string>
     <string name="open_settings">Open Settings</string>
-    <string name="permission_info">The Next Player app needs \"%1$s\" permission to access and play media. Without it, media access and playback won\'t work. To use the app fully, grant the permission.</string>
+    <string name="permission_info">Files Flex needs \"%1$s\" permission to access and play media. Without it, media access and playback won\'t work. To use the app fully, grant the permission.</string>
     <string name="permission_not_granted">Permission Not Granted</string>
     <string name="permission_request">Permission Request</string>
-    <string name="permission_settings">The Next Player app needs \"%1$s\" permission to access and play media. Without it, media access and playback won\'t work. To use the app fully, grant the permission from settings since it was permanently denied.</string>
+    <string name="permission_settings">Files Flex needs \"%1$s\" permission to access and play media. Without it, media access and playback won\'t work. To use the app fully, grant the permission from settings since it was permanently denied.</string>
     <string name="player_controls_exit">Navigate up</string>
     <string name="player_controls_next">Player next</string>
     <string name="player_controls_play_pause">Player play pause</string>
@@ -76,7 +76,7 @@
     <string name="size">Size</string>
     <string name="sort">Sort</string>
     <string name="title">Title</string>
-    <string name="title_activity_player">Next Player Activity</string>
+    <string name="title_activity_player">Files Flex Player</string>
     <string name="unknown_error">An unknown error has occurred</string>
     <string name="playback">Playback</string>
     <string name="interface_name">Interface</string>
@@ -458,21 +458,24 @@
     <string name="retry">Retry</string>
     <string name="edit">Edit</string>
 
-    <!-- FileFlix -->
-    <string name="fileflix">FileFlix</string>
-    <string name="fileflix_server">FileFlix Server</string>
+    <!-- Files Flex laptop server -->
+    <string name="fileflix">Files Flex</string>
+    <string name="fileflix_server">Files Flex Server</string>
     <string name="fileflix_server_url">Server URL</string>
-    <string name="fileflix_server_url_hint">http://192.168.1.xxx:3000</string>
-    <string name="fileflix_connect">Connect to FileFlix</string>
-    <string name="fileflix_connected">Connected to FileFlix</string>
+    <string name="fileflix_server_url_hint">http://10.10.2.4:7010</string>
+    <string name="fileflix_connect">Connect to Files Flex</string>
+    <string name="fileflix_connected">Connected to Files Flex</string>
     <string name="fileflix_change_server">Change Server</string>
     <string name="fileflix_disconnect">Disconnect</string>
-    <string name="fileflix_invalid_url">Please enter a valid HTTP or HTTPS URL (e.g. http://192.168.1.50:3000)</string>
-    <string name="fileflix_connection_failed">Could not connect to FileFlix server. Verify the laptop server is running.</string>
+    <string name="fileflix_invalid_url">Please enter a valid HTTP or HTTPS URL (e.g. http://10.10.2.4:7010)</string>
+    <string name="fileflix_connection_failed">Could not connect to the Files Flex server. Verify the laptop server is running and both devices are on the same network.</string>
     <string name="fileflix_no_media">No media files found in this folder.</string>
-    <string name="fileflix_search_hint">Search FileFlix library…</string>
+    <string name="fileflix_search_hint">Search Files Flex library…</string>
     <string name="fileflix_root_folder">Library Root</string>
     <string name="fileflix_desc">Stream your laptop media library over Wi-Fi</string>
+    <string name="smb_source_title">Windows shared folders</string>
+    <string name="smb_source_desc">Browse SMB shares from this laptop or another PC, like VLC</string>
+    <string name="smb_source_add">Add SMB share</string>
 
     <!-- Copy / Move -->
     <string name="copy">Copy</string>

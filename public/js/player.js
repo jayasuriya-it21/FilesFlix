@@ -51,7 +51,10 @@
   const pFwd = $('pFwd');
   const pVolBtn = $('pVolBtn');
   const pVol = $('pVol');
+  const pPrev = $('pPrev');
   const pNext = $('pNext');
+  const pRepeat = $('pRepeat');
+  const pQueue = $('pQueue');
   const pPip = $('pPip');
   const pCC = $('pCC');
   const pGear = $('pGear');
@@ -76,6 +79,10 @@
     expand: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg>',
     compress: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v3.5A1.5 1.5 0 0 1 7.5 9H4M20 9h-3.5A1.5 1.5 0 0 1 15 7.5V4M15 20v-3.5a1.5 1.5 0 0 1 1.5-1.5H20M4 15h3.5a1.5 1.5 0 0 1 1.5 1.5V20"/></svg>',
     next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5.5v13l8.5-6.5z" fill="currentColor"/><rect x="16.6" y="5.5" width="2.6" height="13" rx="1.1" fill="currentColor"/></svg>',
+    prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5.5v13L9.5 12z" fill="currentColor"/><rect x="4.8" y="5.5" width="2.6" height="13" rx="1.1" fill="currentColor"/></svg>',
+    repeat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3.8 20.5 7 17 10.2"/><path d="M3.5 11V9.5A2.5 2.5 0 0 1 6 7h14"/><path d="m7 20.2-3.5-3.2L7 13.8"/><path d="M20.5 13v1.5A2.5 2.5 0 0 1 18 17H4"/></svg>',
+    repeatOne: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3.8 20.5 7 17 10.2M3.5 11V9.5A2.5 2.5 0 0 1 6 7h14M7 20.2 3.5 17 7 13.8M20.5 13v1.5A2.5 2.5 0 0 1 18 17H4"/><path d="M12 10v5M10.6 11.2 12 10"/></svg>',
+    queue: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h12M4 11h12M4 16h8"/><path d="m16 15 5 3-5 3z" fill="currentColor" stroke="none"/></svg>',
     check: '<svg class="pCheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
   };
 
@@ -107,6 +114,7 @@
   let locked = false;
   let subtitleDelay = 0;
   let gesture = null;
+  let repeatMode = 'off';
   let lastResumeSave = 0;
   const cueTimes = new WeakMap();
   const PREF_KEY = 'fileflix.player.preferences';
@@ -122,10 +130,12 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* storage may be blocked/full */ }
   }
   const preferences = readStored(PREF_KEY, {});
+  repeatMode = ['off', 'all', 'one'].includes(preferences.repeatMode) ? preferences.repeatMode : 'off';
   function savePreferences() {
     writeStored(PREF_KEY, {
       volume: video.volume, muted: video.muted, speed: video.playbackRate,
-      aspect: preferences.aspect || 'contain', subtitleSize: preferences.subtitleSize || 100
+      aspect: preferences.aspect || 'contain', subtitleSize: preferences.subtitleSize || 100,
+      repeatMode
     });
   }
   function saveResume() {
@@ -236,7 +246,9 @@
     // audio-only chrome: no sprite, no subtitles, no PiP
     pCC.hidden = true;
     pPip.hidden = true;
+    pPrev.hidden = true;
     pNext.hidden = true;
+    pQueue.hidden = true;
     previewEl.classList.remove('on');
     previewImg.style.backgroundImage = '';
 
@@ -821,11 +833,15 @@
 
   function setupNextButton() {
     const list = siblings || computeSiblings();
-    if (!current || current.audio || !list || siblingIdx < 0 || siblingIdx + 1 >= list.length) {
+    if (!current || current.audio || !list || siblingIdx < 0) {
+      pPrev.hidden = true;
       pNext.hidden = true;
+      pQueue.hidden = true;
       return;
     }
-    pNext.hidden = false;
+    pPrev.hidden = siblingIdx <= 0;
+    pNext.hidden = siblingIdx + 1 >= list.length && repeatMode !== 'all';
+    pQueue.hidden = list.length < 2;
   }
 
   /** Fallback: derive the folder's video list from known entries. */
@@ -840,12 +856,19 @@
     return vids;
   }
 
-  pNext.addEventListener('click', () => {
+  function playSibling(step) {
     const list = siblings || computeSiblings();
-    if (!list || siblingIdx < 0 || siblingIdx + 1 >= list.length) return;
-    const e = list[siblingIdx + 1];
-    open({ rel: e.rel, name: e.name, audio: false, folderEntries: current.folderEntries }, list, siblingIdx + 1);
-  });
+    if (!list || !list.length || siblingIdx < 0) return false;
+    let nextIndex = siblingIdx + step;
+    if (repeatMode === 'all') nextIndex = (nextIndex + list.length) % list.length;
+    if (nextIndex < 0 || nextIndex >= list.length) return false;
+    const e = list[nextIndex];
+    open({ rel: e.rel, name: e.name, audio: false, folderEntries: current.folderEntries }, list, nextIndex);
+    return true;
+  }
+
+  pPrev.addEventListener('click', () => playSibling(-1));
+  pNext.addEventListener('click', () => playSibling(1));
 
   /* ---------- subtitles (kept from v2, menu-driven) ---------- */
 
@@ -1027,6 +1050,27 @@
     return d;
   }
 
+  function menuAction(label, note, active, onClick) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pMenuItem pQueueItem' + (active ? ' active' : '');
+    b.setAttribute('role', 'menuitem');
+    const copy = document.createElement('span');
+    copy.className = 'pQueueCopy';
+    const name = document.createElement('strong');
+    name.textContent = label;
+    copy.appendChild(name);
+    if (note) {
+      const meta = document.createElement('small');
+      meta.textContent = note;
+      copy.appendChild(meta);
+    }
+    b.appendChild(copy);
+    if (active) b.insertAdjacentHTML('beforeend', I.check);
+    b.addEventListener('click', onClick);
+    return b;
+  }
+
   function menuSep() {
     const d = document.createElement('div');
     d.className = 'pMenuSep';
@@ -1035,6 +1079,7 @@
 
   function openGearMenu() {
     pMenu.textContent = '';
+    pMenu.classList.remove('queueMode');
     pMenu.setAttribute('aria-label', 'Playback settings');
 
     pMenu.appendChild(menuLabel('Playback speed'));
@@ -1089,9 +1134,25 @@
     openMenu(pGear);
   }
 
+  function openQueueMenu() {
+    const list = siblings || computeSiblings() || [];
+    pMenu.textContent = '';
+    pMenu.classList.add('queueMode');
+    pMenu.setAttribute('aria-label', 'Playlist');
+    pMenu.appendChild(menuLabel('Up next · ' + list.length + ' videos'));
+    list.forEach((entry, index) => {
+      pMenu.appendChild(menuAction(entry.name, index === siblingIdx ? 'Now playing' : '', index === siblingIdx, () => {
+        closeMenu(false);
+        if (index !== siblingIdx) open({ rel: entry.rel, name: entry.name, audio: false, folderEntries: current.folderEntries }, list, index);
+      }));
+    });
+    openMenu(pQueue);
+  }
+
   function openCCMenu() {
     const opts = subtitleOptions();
     pMenu.textContent = '';
+    pMenu.classList.remove('queueMode');
     pMenu.setAttribute('aria-label', 'Subtitles');
 
     for (const o of opts) {
@@ -1233,6 +1294,12 @@
     saveResume();
     syncPlayBtn(false);
     wakeControls();
+    if (repeatMode === 'one') {
+      seekTo(0);
+      tryPlay();
+    } else {
+      playSibling(1);
+    }
   });
 
   pVolBtn.innerHTML = I.volHigh;
@@ -1241,11 +1308,33 @@
   pPlay.setAttribute('title', 'Play / pause (Space)');
   pRew.innerHTML = I.rew10;
   pFwd.innerHTML = I.fwd10;
+  pPrev.innerHTML = I.prev;
   pNext.innerHTML = I.next;
+  pQueue.innerHTML = I.queue;
   pPip.innerHTML = I.pip;
   pCC.innerHTML = I.cc;
   pGear.innerHTML = I.gear;
   pFs.innerHTML = I.expand;
+  function paintRepeat() {
+    pRepeat.innerHTML = repeatMode === 'one' ? I.repeatOne : I.repeat;
+    pRepeat.classList.toggle('active', repeatMode !== 'off');
+    const label = repeatMode === 'one' ? 'Repeat one' : repeatMode === 'all' ? 'Repeat all' : 'Repeat off';
+    pRepeat.setAttribute('aria-label', label);
+    pRepeat.title = label;
+  }
+  paintRepeat();
+  pRepeat.addEventListener('click', () => {
+    repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+    preferences.repeatMode = repeatMode;
+    savePreferences();
+    paintRepeat();
+    setupNextButton();
+    notice(pRepeat.getAttribute('aria-label'), 1200);
+  });
+  pQueue.addEventListener('click', () => {
+    if (menuOpen && menuTrigger === pQueue) closeMenu(true);
+    else { closeMenu(false); openQueueMenu(); }
+  });
   if (typeof preferences.volume === 'number' && Number.isFinite(preferences.volume)) video.volume = Math.max(0, Math.min(1, preferences.volume));
   video.muted = preferences.muted === true;
   video.playbackRate = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].includes(preferences.speed) ? preferences.speed : 1;
@@ -1452,6 +1541,10 @@
     else if (k === 'ArrowDown') { ev.preventDefault(); ev.stopPropagation(); nudgeVolume(-0.05); }
     else if (k === 'm' || k === 'M') toggleMute();
     else if (k === 'f' || k === 'F') toggleFullscreen();
+    else if (k === 'p' || k === 'P') playSibling(-1);
+    else if (k === 'n' || k === 'N') playSibling(1);
+    else if (k === 'r' || k === 'R') pRepeat.click();
+    else if ((k === 'q' || k === 'Q') && !pQueue.hidden) openQueueMenu();
     else if (k === 'c' || k === 'C') {
       if (!pCC.hidden) {
         if (menuOpen && menuTrigger === pCC) closeMenu(true);

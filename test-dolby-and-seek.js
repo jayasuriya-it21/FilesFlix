@@ -91,6 +91,17 @@ async function testDolbyAndSeek() {
   assert(!formats2.includes('Dolby Vision'), 'Non-DV file must not claim Dolby Vision');
   console.log('  PASS: Honest Dolby verified (no universal claim, no fake Atmos from eac3)');
 
+  const hdr10PlusFormats = meta.extractSourceFormats({
+    video: { codec: 'hevc', dolbyVision: false, hdr10Plus: true, hdr10: true },
+    audioStreams: []
+  });
+  assert.deepStrictEqual(hdr10PlusFormats, ['HDR10+'], 'HDR10+ must take precedence over its HDR10 base layer');
+  const hdr10Formats = meta.extractSourceFormats({
+    video: { codec: 'hevc', dolbyVision: false, hdr10Plus: false, hdr10: true },
+    audioStreams: []
+  });
+  assert.deepStrictEqual(hdr10Formats, ['HDR10'], 'Static PQ/BT.2020 video must be labelled HDR10');
+
   // --- 3. Probe real file (Annabelle MKV if present, or demo MP4) ---
   console.log('\nTest 3: Testing with actual media library file...');
   const multiAudioFile = 'E:\\Videos\\Hollywood\\Anand\\Annabelle Comes Home (2019).mkv';

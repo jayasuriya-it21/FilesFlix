@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0d16">
 <title>FileFlix</title>
-<link rel="stylesheet" href="/css/style.css?v=10">
+<link rel="stylesheet" href="/css/style.css?v=11">
 </head>
 <body>
 <a class="skipLink" href="#main">Skip to library</a>
@@ -140,6 +140,7 @@
         </div>
       </div>
       <div id="pBtnRow">
+        <button class="pBtn pOpt" id="pPrev" aria-label="Play previous video" title="Previous (P)" hidden></button>
         <button class="pBtn" id="pPlay" aria-label="Play" title="Play / pause (Space)"></button>
         <button class="pBtn" id="pRew" aria-label="Back 10 seconds" title="Back 10 seconds (←)"></button>
         <button class="pBtn" id="pFwd" aria-label="Forward 10 seconds" title="Forward 10 seconds (→)"></button>
@@ -149,6 +150,8 @@
         </div>
         <span class="pSpacer" aria-hidden="true"></span>
         <button class="pBtn pOpt" id="pNext" aria-label="Play next video" title="Play next" hidden></button>
+        <button class="pBtn pOpt" id="pRepeat" aria-label="Repeat off" title="Repeat mode"></button>
+        <button class="pBtn pOpt" id="pQueue" aria-label="Open playlist" title="Playlist" aria-haspopup="menu" aria-expanded="false" hidden></button>
         <button class="pBtn pOpt" id="pPip" aria-label="Picture in picture" title="Picture in picture" hidden></button>
         <button class="pBtn" id="pCC" aria-label="Subtitles" title="Subtitles (C)" aria-haspopup="menu" aria-expanded="false" hidden></button>
         <button class="pBtn" id="pGear" aria-label="Settings" title="Playback settings" aria-haspopup="menu" aria-expanded="false"></button>
@@ -156,13 +159,13 @@
       </div>
     </div>
 
-    <div id="pMenu" role="menu" hidden></div>
+    <div id="pMenu" role="menu" aria-live="polite" hidden></div>
     <button id="pUnlock" class="pUnlock" hidden>Unlock controls</button>
   </div>
 </div>
 
 <noscript><p style="color:#f2f4f8;font-family:system-ui,sans-serif;padding:2rem">FileFlix needs JavaScript to render the library.</p></noscript>
-<script src="/js/player.js?v=10"></script>
+<script src="/js/player.js?v=11"></script>
 <script src="/js/app.js?v=9"></script>
 </body>
 </html>

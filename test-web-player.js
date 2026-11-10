@@ -4,6 +4,17 @@ const fs = require('fs');
 const vm = require('vm');
 const assert = require('assert/strict');
 const source = fs.readFileSync('public/js/player.js', 'utf8');
+const playerMarkup = fs.readFileSync('public/index.html', 'utf8');
+for (const id of ['pPrev', 'pRepeat', 'pQueue']) {
+  assert.match(playerMarkup, new RegExp(`id="${id}"`), `${id} control is present in the player`);
+}
+assert.match(source, /function playSibling\(step\)/, 'previous/next share playlist navigation');
+assert.match(source, /function openQueueMenu\(\)/, 'queue menu is implemented');
+assert.match(source, /repeatMode === 'one'/, 'repeat-one behavior is implemented');
+assert.match(source, /repeatMode === 'all'/, 'repeat-all behavior is implemented');
+assert.match(source, /pPrev\.addEventListener\('click'/, 'previous control is wired');
+assert.match(source, /pRepeat\.addEventListener\('click'/, 'repeat control is wired');
+assert.match(source, /pQueue\.addEventListener\('click'/, 'queue control is wired');
 function section(start, end) { return source.slice(source.indexOf(start), source.indexOf(end)); }
 const storage = new Map();
 const context = vm.createContext({ assert, console, localStorage: {
@@ -101,5 +112,5 @@ ${section('  async function togglePip(', '  function setupNextButton(')}
 video.requestPictureInPicture=async()=>{throw new Error('unsupported')};
 this.pipCheck=async()=>{await togglePip(); assert.match(message,/Picture in picture is unavailable/)};
 `, context);
-context.pipCheck().then(() => console.log('PASS: web player preferences, resume, subtitles, lock, remote keys, gestures and PiP errors'))
+context.pipCheck().then(() => console.log('PASS: web player preferences, resume, subtitles, lock, remote keys, gestures, PiP errors, playlist and repeat controls'))
   .catch(error => { console.error(error); process.exitCode=1; });
